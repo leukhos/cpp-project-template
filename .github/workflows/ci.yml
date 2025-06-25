@@ -34,18 +34,31 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Cache CMake dependencies
+    - name: Cache FetchContent dependencies
       uses: actions/cache@v4
       with:
         path: |
           ${{ steps.strings.outputs.build-output-dir }}/_deps
-        key: ${{ runner.os }}-cmake-deps-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+        key: ${{ runner.os }}-deps-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
         restore-keys: |
-          ${{ runner.os }}-cmake-deps-
+          ${{ runner.os }}-deps-
+
+    - name: Cache CMake configuration
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ steps.strings.outputs.build-output-dir }}/CMakeCache.txt
+          ${{ steps.strings.outputs.build-output-dir }}/CMakeFiles
+          ${{ steps.strings.outputs.build-output-dir }}/build.ninja
+          ${{ steps.strings.outputs.build-output-dir }}/rules.ninja
+        key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-cmake-
 
     - name: Configure CMake
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -G Ninja
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
