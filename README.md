@@ -2,6 +2,13 @@
 
 A modern C++ project template with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
+## Todo
+1. Add github workflows to run test on windows, linux and macos
+2. Add some documentation about code guidelines, like header sorting rules
+3. Update README.md and CLAUDE.md
+4. Add testing and benchmarking structure guidelines
+5. Review google library version (should we use latest?)
+
 ## Features
 
 - **CMake Build System**: Modern CMake (3.14+) with proper target-based configuration

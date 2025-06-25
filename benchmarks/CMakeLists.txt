@@ -1,6 +1,6 @@
 add_executable(
     calculator_benchmarks
-    calculator_benchmark.cpp
+    calculator.benchmark.cpp
 )
 
 target_link_libraries(
