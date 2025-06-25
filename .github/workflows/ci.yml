@@ -49,22 +49,13 @@ jobs:
         path: |
           ${{ steps.strings.outputs.build-output-dir }}/CMakeCache.txt
           ${{ steps.strings.outputs.build-output-dir }}/CMakeFiles
-          ${{ steps.strings.outputs.build-output-dir }}/build.ninja
-          ${{ steps.strings.outputs.build-output-dir }}/rules.ninja
         key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
         restore-keys: |
           ${{ runner.os }}-cmake-
 
-    - name: Set up MSVC (Windows only)
-      if: runner.os == 'Windows'
-      uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: 'amd64'
-
     - name: Configure CMake
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -G Ninja
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
