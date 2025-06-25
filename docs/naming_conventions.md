@@ -24,7 +24,7 @@ Please follow these naming conventions consistently throughout the codebase:
 | Concepts (C++20) | PascalCase | `Drawable`, `Serializable` |
 | Macros | UPPERCASE | `MAX_BUFFER_SIZE`, `DEBUG_PRINT` |
 | Files | snake_case | `data_processor.h`, `http_client.cpp` |
-| Benchmarks          | original_name.benchmark.cpp      | `network_manager.benchmark.cpp`                     |
+| Benchmarks | original_name.benchmark.cpp | `network_manager.benchmark.cpp` |
 | Tests | original_name.test.cpp | `network_manager.test.cpp` |
 | Directories | snake_case | `data_processing/`, `network_utils/` |
 
