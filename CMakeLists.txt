@@ -13,22 +13,51 @@ endif()
 
 include(FetchContent)
 
-add_subdirectory(src)
+# Gather source files (exclude main.cpp from library)
+file(GLOB LIB_SOURCES src/*.cpp src/*.h include/*.h)
+list(REMOVE_ITEM LIB_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
+# Main library
+add_library(cpp_project_template ${LIB_SOURCES})
+
+target_include_directories(cpp_project_template
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+# Main executable
+add_executable(main src/main.cpp)
+target_link_libraries(main cpp_project_template)
+
+# Testing
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG f8d7d77c06936315286eb55f8de22cd23c188571 # release 1.14.0
-
     )
     
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(googletest)
     
-    add_subdirectory(tests)
+    # Test sources
+    file(GLOB TEST_SOURCES tests/*.cpp tests/*.h)
+    
+    add_executable(calculator_tests ${TEST_SOURCES})
+    
+    target_link_libraries(calculator_tests
+        cpp_project_template
+        gtest_main
+        gmock_main
+    )
+    
+    include(GoogleTest)
+    gtest_discover_tests(calculator_tests)
 endif()
 
+# Benchmarks
 option(BUILD_BENCHMARKS "Build benchmark executables" OFF)
 if(BUILD_BENCHMARKS)
     FetchContent_Declare(
@@ -40,5 +69,13 @@ if(BUILD_BENCHMARKS)
     set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(benchmark)
     
-    add_subdirectory(benchmarks)
+    # Benchmark sources
+    file(GLOB BENCHMARK_SOURCES benchmarks/*.cpp benchmarks/*.h)
+    
+    add_executable(calculator_benchmarks ${BENCHMARK_SOURCES})
+    
+    target_link_libraries(calculator_benchmarks
+        cpp_project_template
+        benchmark::benchmark
+    )
 endif()

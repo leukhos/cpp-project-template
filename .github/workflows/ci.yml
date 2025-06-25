@@ -34,14 +34,24 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Cache CMake dependencies
+    - name: Cache FetchContent dependencies
       uses: actions/cache@v4
       with:
         path: |
           ${{ steps.strings.outputs.build-output-dir }}/_deps
-        key: ${{ runner.os }}-cmake-deps-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+        key: ${{ runner.os }}-deps-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
         restore-keys: |
-          ${{ runner.os }}-cmake-deps-
+          ${{ runner.os }}-deps-
+
+    - name: Cache CMake configuration
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ steps.strings.outputs.build-output-dir }}/CMakeCache.txt
+          ${{ steps.strings.outputs.build-output-dir }}/CMakeFiles
+        key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-cmake-
 
     - name: Configure CMake
       run: >
