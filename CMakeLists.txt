@@ -15,7 +15,7 @@ include(FetchContent)
 
 # Gather source files (exclude main.cpp from library)
 file(GLOB LIB_SOURCES src/*.cpp src/*.h include/*.h)
-list(REMOVE_ITEM ALL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+list(REMOVE_ITEM LIB_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 # Main library
 add_library(cpp_project_template ${LIB_SOURCES})
