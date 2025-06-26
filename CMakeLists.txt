@@ -36,7 +36,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG f8d7d77c06936315286eb55f8de22cd23c188571 # release 1.14.0
+        GIT_TAG 52eb8108c5bdec04579160ae17225d66034bd723 # release 1.17.0
     )
     
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -63,7 +63,7 @@ if(BUILD_BENCHMARKS)
     FetchContent_Declare(
         benchmark
         GIT_REPOSITORY https://github.com/google/benchmark.git
-        GIT_TAG 344117638c8ff7e239044fd0fa7085839fc03021 # release 1.8.3
+        GIT_TAG eddb0241389718a23a42db6af5f0164b6e0139af # release 1.9.4
     )
     
     set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
