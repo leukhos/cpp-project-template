@@ -1,4 +1,8 @@
+// First-party headers
 #include "calculator.h"
+
+// Standard library headers
+#include <stdexcept>
 
 int Calculator::add(int firstValue, int secondValue) { return firstValue + secondValue; }
 
