@@ -5,6 +5,10 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+using ::testing::DoubleEq;
+using ::testing::Eq;
+using ::testing::Throws;
+
 class CalculatorTest : public ::testing::Test
 {
   protected:
@@ -17,12 +21,12 @@ TEST_F(CalculatorTest, Add_PositiveNumbers_ReturnsCorrectSum)
     int firstValue = 2;
     int secondValue = 3;
     int expectedSum = 5;
-    
+
     // Act
     int result = calculator.add(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedSum);
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
 TEST_F(CalculatorTest, Add_LargePositiveNumbers_ReturnsCorrectSum)
@@ -31,12 +35,12 @@ TEST_F(CalculatorTest, Add_LargePositiveNumbers_ReturnsCorrectSum)
     int firstValue = 10;
     int secondValue = 15;
     int expectedSum = 25;
-    
+
     // Act
     int result = calculator.add(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedSum);
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
 TEST_F(CalculatorTest, Add_NegativeNumbers_ReturnsCorrectSum)
@@ -45,12 +49,12 @@ TEST_F(CalculatorTest, Add_NegativeNumbers_ReturnsCorrectSum)
     int firstValue = -2;
     int secondValue = -3;
     int expectedSum = -5;
-    
+
     // Act
     int result = calculator.add(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedSum);
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
 TEST_F(CalculatorTest, Add_MixedSignNumbers_ReturnsCorrectSum)
@@ -59,12 +63,12 @@ TEST_F(CalculatorTest, Add_MixedSignNumbers_ReturnsCorrectSum)
     int firstValue = -10;
     int secondValue = 5;
     int expectedSum = -5;
-    
+
     // Act
     int result = calculator.add(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedSum);
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
 TEST_F(CalculatorTest, Subtract_PositiveNumbers_ReturnsCorrectDifference)
@@ -73,12 +77,12 @@ TEST_F(CalculatorTest, Subtract_PositiveNumbers_ReturnsCorrectDifference)
     int firstValue = 5;
     int secondValue = 3;
     int expectedDifference = 2;
-    
+
     // Act
     int result = calculator.subtract(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedDifference);
+    EXPECT_THAT(result, Eq(expectedDifference));
 }
 
 TEST_F(CalculatorTest, Subtract_ResultingInNegative_ReturnsCorrectDifference)
@@ -87,12 +91,12 @@ TEST_F(CalculatorTest, Subtract_ResultingInNegative_ReturnsCorrectDifference)
     int firstValue = 10;
     int secondValue = 15;
     int expectedDifference = -5;
-    
+
     // Act
     int result = calculator.subtract(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedDifference);
+    EXPECT_THAT(result, Eq(expectedDifference));
 }
 
 TEST_F(CalculatorTest, Multiply_PositiveNumbers_ReturnsCorrectProduct)
@@ -101,12 +105,12 @@ TEST_F(CalculatorTest, Multiply_PositiveNumbers_ReturnsCorrectProduct)
     int firstValue = 3;
     int secondValue = 4;
     int expectedProduct = 12;
-    
+
     // Act
     int result = calculator.multiply(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedProduct);
+    EXPECT_THAT(result, Eq(expectedProduct));
 }
 
 TEST_F(CalculatorTest, Multiply_NegativeAndPositive_ReturnsCorrectProduct)
@@ -115,12 +119,12 @@ TEST_F(CalculatorTest, Multiply_NegativeAndPositive_ReturnsCorrectProduct)
     int firstValue = -2;
     int secondValue = 5;
     int expectedProduct = -10;
-    
+
     // Act
     int result = calculator.multiply(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedProduct);
+    EXPECT_THAT(result, Eq(expectedProduct));
 }
 
 TEST_F(CalculatorTest, Multiply_WithZero_ReturnsZero)
@@ -129,12 +133,12 @@ TEST_F(CalculatorTest, Multiply_WithZero_ReturnsZero)
     int firstValue = 0;
     int secondValue = 100;
     int expectedProduct = 0;
-    
+
     // Act
     int result = calculator.multiply(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedProduct);
+    EXPECT_THAT(result, Eq(expectedProduct));
 }
 
 TEST_F(CalculatorTest, Divide_EvenDivision_ReturnsCorrectQuotient)
@@ -143,12 +147,12 @@ TEST_F(CalculatorTest, Divide_EvenDivision_ReturnsCorrectQuotient)
     int firstValue = 10;
     int secondValue = 2;
     double expectedQuotient = 5.0;
-    
+
     // Act
     double result = calculator.divide(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_DOUBLE_EQ(result, expectedQuotient);
+    EXPECT_THAT(result, DoubleEq(expectedQuotient));
 }
 
 TEST_F(CalculatorTest, Divide_WithRemainder_ReturnsCorrectQuotient)
@@ -157,12 +161,12 @@ TEST_F(CalculatorTest, Divide_WithRemainder_ReturnsCorrectQuotient)
     int firstValue = 7;
     int secondValue = 2;
     double expectedQuotient = 3.5;
-    
+
     // Act
     double result = calculator.divide(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_DOUBLE_EQ(result, expectedQuotient);
+    EXPECT_THAT(result, DoubleEq(expectedQuotient));
 }
 
 TEST_F(CalculatorTest, Divide_NegativeNumber_ReturnsCorrectQuotient)
@@ -171,12 +175,12 @@ TEST_F(CalculatorTest, Divide_NegativeNumber_ReturnsCorrectQuotient)
     int firstValue = -10;
     int secondValue = 2;
     double expectedQuotient = -5.0;
-    
+
     // Act
     double result = calculator.divide(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_DOUBLE_EQ(result, expectedQuotient);
+    EXPECT_THAT(result, DoubleEq(expectedQuotient));
 }
 
 TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException)
@@ -184,9 +188,9 @@ TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException)
     // Arrange
     int firstValue = 10;
     int secondValue = 0;
-    
+
     // Act & Assert
-    EXPECT_THROW(calculator.divide(firstValue, secondValue), std::invalid_argument);
+    EXPECT_THAT([&]() { return calculator.divide(firstValue, secondValue); }, Throws<std::invalid_argument>());
 }
 
 class MockCalculator
@@ -203,13 +207,12 @@ TEST(MockCalculatorTest, Add_WithMock_ReturnsExpectedValue)
     int firstValue = 2;
     int secondValue = 3;
     int expectedResult = 5;
-    
-    EXPECT_CALL(mockCalculator, add(firstValue, secondValue))
-        .WillOnce(::testing::Return(expectedResult));
-    
+
+    EXPECT_CALL(mockCalculator, add(firstValue, secondValue)).WillOnce(::testing::Return(expectedResult));
+
     // Act
     int result = mockCalculator.add(firstValue, secondValue);
-    
+
     // Assert
-    EXPECT_EQ(result, expectedResult);
+    EXPECT_THAT(result, Eq(expectedResult));
 }

@@ -179,6 +179,40 @@ TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException)
 }
 ```
 
+### Assertion Guidelines (MANDATORY)
+
+**ALWAYS prefer `EXPECT_THAT` with matchers over legacy assertions:**
+
+```cpp
+// Preferred: Use EXPECT_THAT with matchers
+EXPECT_THAT(result, Eq(expectedValue));
+EXPECT_THAT(result, DoubleEq(expectedDouble));
+EXPECT_THAT([&]() { return calculator.divide(10, 0); }, Throws<std::invalid_argument>());
+
+// Avoid: Legacy assertion macros
+EXPECT_EQ(result, expectedValue);        // Use EXPECT_THAT(result, Eq(expectedValue))
+EXPECT_DOUBLE_EQ(result, expectedDouble); // Use EXPECT_THAT(result, DoubleEq(expectedDouble))
+EXPECT_THROW(func(), exception);         // Use EXPECT_THAT(lambda, Throws<exception>())
+```
+
+**Required matcher imports:**
+```cpp
+// Third-party headers
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+using ::testing::DoubleEq;
+using ::testing::Eq;
+using ::testing::Throws;
+```
+
+**Benefits of EXPECT_THAT with matchers:**
+- **Composability**: Matchers can be combined with `AllOf`, `AnyOf`, `Not`
+- **Readability**: More expressive and English-like syntax
+- **Extensibility**: Custom matchers for domain-specific assertions
+- **Better error messages**: More descriptive failure output
+- **Consistency**: Unified assertion style across all test types
+
 ### Testing Best Practices
 - **One assertion per test**: Each test should verify a single behavior or outcome
 - **Descriptive test names**: Test names should be readable and explain the test purpose without looking at the implementation
