@@ -5,9 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 This is a C++ project template repository that provides a modern C++ project structure with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing. The template includes example code demonstrating best practices and proper project organization.
 
-## C++ Naming Guidelines
+## C++ Guidelines
 
 See [docs/naming_conventions.md](docs/naming_conventions.md) for detailed naming conventions.
+
+See [docs/code_guidelines.md](docs/code_guidelines.md) for code formatting and header inclusion rules.
 
 ## Current Status
 The project template is fully implemented with:

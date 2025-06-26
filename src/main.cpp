@@ -1,4 +1,7 @@
+// First-party headers
 #include "calculator.h"
+
+// Standard library headers
 #include <iostream>
 
 int main()

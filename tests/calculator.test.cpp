@@ -1,4 +1,7 @@
+// First-party headers
 #include "calculator.h"
+
+// Third-party headers
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
