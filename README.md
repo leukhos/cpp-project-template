@@ -2,20 +2,13 @@
 
 A modern C++ project template with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
-## Todo
-1. Add github workflows to run test on windows, linux and macos
-2. Add some documentation about code guidelines, like header sorting rules
-3. Update README.md and CLAUDE.md
-4. Add testing and benchmarking structure guidelines
-5. Review google library version (should we use latest?)
-
 ## Features
 
 - **CMake Build System**: Modern CMake (3.14+) with proper target-based configuration
 - **Testing**: GoogleTest and GoogleMock integration with automatic test discovery
 - **Benchmarking**: Google Benchmark for performance testing
 - **Dependencies**: Automatic dependency management using CMake FetchContent
-- **Modern C++**: C++17 standard with comprehensive compiler warnings
+- **Modern C++**: C++20 standard with comprehensive compiler warnings
 
 ## Project Structure
 
@@ -30,10 +23,13 @@ cpp-project-template/
 │   └── calculator.h       # Example header
 ├── tests/                  # Unit tests
 │   ├── CMakeLists.txt
-│   └── test_calculator.cpp # Example GoogleTest/GoogleMock tests
+│   └── calculator.test.cpp # Example GoogleTest/GoogleMock tests
 ├── benchmarks/             # Performance benchmarks
 │   ├── CMakeLists.txt
-│   └── bench_calculator.cpp # Example Google Benchmark tests
+│   └── calculator.benchmark.cpp # Example Google Benchmark tests
+├── docs/                   # Documentation
+│   ├── code_guidelines.md  # Coding standards and formatting rules
+│   └── naming_conventions.md # Naming convention guidelines
 └── cmake/                  # CMake utilities
     └── CompilerWarnings.cmake # Compiler warning configuration
 ```
@@ -42,8 +38,8 @@ cpp-project-template/
 
 ### Prerequisites
 
-- CMake 3.14 or higher
-- C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
+- CMake 3.30 or higher
+- C++20 compatible compiler (GCC 10+, Clang 10+, MSVC 2019+)
 
 ### Basic Build
 
@@ -74,7 +70,7 @@ make test
 # or
 ctest
 # or run directly
-./tests/calculator_tests
+./tests/calculator_test
 ```
 
 ### Building with Benchmarks
@@ -88,7 +84,7 @@ make
 ### Running Benchmarks
 
 ```bash
-./benchmarks/calculator_benchmarks
+./benchmarks/calculator_benchmark
 ```
 
 ## CMake Options
@@ -101,9 +97,27 @@ make
 
 All dependencies are automatically fetched and built using CMake FetchContent:
 
-- **GoogleTest**: v1.14.0 - Testing framework
+- **GoogleTest**: v1.17.0 - Testing framework
 - **GoogleMock**: Included with GoogleTest - Mocking framework  
-- **Google Benchmark**: v1.8.3 - Performance benchmarking
+- **Google Benchmark**: v1.9.4 - Performance benchmarking
+
+## Code Guidelines
+
+This project follows strict coding standards:
+
+- **Naming Conventions**: See [docs/naming_conventions.md](docs/naming_conventions.md)
+- **Code Formatting**: See [docs/code_guidelines.md](docs/code_guidelines.md)
+- **Header Organization**: Specific order and grouping requirements
+- **Test Naming**: `MethodName_Scenario_ExpectedBehavior` format
+- **Benchmark Naming**: `BM_DescriptiveName` format
+
+### Code Formatting
+
+The project uses clang-format with Microsoft style:
+
+```bash
+clang-format -i src/**/*.{cpp,h} include/**/*.h tests/**/*.cpp
+```
 
 ## Usage as Template
 
@@ -111,7 +125,8 @@ All dependencies are automatically fetched and built using CMake FetchContent:
 2. Replace the example calculator code with your own implementation
 3. Update the project name in `CMakeLists.txt`
 4. Modify the library name and source files in `src/CMakeLists.txt`
-5. Update tests and benchmarks accordingly
+5. Update tests and benchmarks following the naming conventions
+6. Follow the coding guidelines in `docs/` directory
 
 ## License
 

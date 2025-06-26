@@ -1,6 +1,13 @@
+// First-party headers
 #include "calculator.h"
+
+// Third-party headers
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+using ::testing::DoubleEq;
+using ::testing::Eq;
+using ::testing::Throws;
 
 class CalculatorTest : public ::testing::Test
 {
@@ -8,39 +15,183 @@ class CalculatorTest : public ::testing::Test
     Calculator calculator;
 };
 
-TEST_F(CalculatorTest, AddPositiveNumbers)
+TEST_F(CalculatorTest, Add_PositiveNumbers_ReturnsCorrectSum)
 {
-    EXPECT_EQ(calculator.add(2, 3), 5);
-    EXPECT_EQ(calculator.add(10, 15), 25);
+    // Arrange
+    int firstValue = 2;
+    int secondValue = 3;
+    int expectedSum = 5;
+
+    // Act
+    int result = calculator.add(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
-TEST_F(CalculatorTest, AddNegativeNumbers)
+TEST_F(CalculatorTest, Add_LargePositiveNumbers_ReturnsCorrectSum)
 {
-    EXPECT_EQ(calculator.add(-2, -3), -5);
-    EXPECT_EQ(calculator.add(-10, 5), -5);
+    // Arrange
+    int firstValue = 10;
+    int secondValue = 15;
+    int expectedSum = 25;
+
+    // Act
+    int result = calculator.add(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
-TEST_F(CalculatorTest, SubtractNumbers)
+TEST_F(CalculatorTest, Add_NegativeNumbers_ReturnsCorrectSum)
 {
-    EXPECT_EQ(calculator.subtract(5, 3), 2);
-    EXPECT_EQ(calculator.subtract(10, 15), -5);
+    // Arrange
+    int firstValue = -2;
+    int secondValue = -3;
+    int expectedSum = -5;
+
+    // Act
+    int result = calculator.add(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
-TEST_F(CalculatorTest, MultiplyNumbers)
+TEST_F(CalculatorTest, Add_MixedSignNumbers_ReturnsCorrectSum)
 {
-    EXPECT_EQ(calculator.multiply(3, 4), 12);
-    EXPECT_EQ(calculator.multiply(-2, 5), -10);
-    EXPECT_EQ(calculator.multiply(0, 100), 0);
+    // Arrange
+    int firstValue = -10;
+    int secondValue = 5;
+    int expectedSum = -5;
+
+    // Act
+    int result = calculator.add(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedSum));
 }
 
-TEST_F(CalculatorTest, DivideNumbers)
+TEST_F(CalculatorTest, Subtract_PositiveNumbers_ReturnsCorrectDifference)
 {
-    EXPECT_DOUBLE_EQ(calculator.divide(10, 2), 5.0);
-    EXPECT_DOUBLE_EQ(calculator.divide(7, 2), 3.5);
-    EXPECT_DOUBLE_EQ(calculator.divide(-10, 2), -5.0);
+    // Arrange
+    int firstValue = 5;
+    int secondValue = 3;
+    int expectedDifference = 2;
+
+    // Act
+    int result = calculator.subtract(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedDifference));
 }
 
-TEST_F(CalculatorTest, DivideByZeroThrowsException) { EXPECT_THROW(calculator.divide(10, 0), std::invalid_argument); }
+TEST_F(CalculatorTest, Subtract_ResultingInNegative_ReturnsCorrectDifference)
+{
+    // Arrange
+    int firstValue = 10;
+    int secondValue = 15;
+    int expectedDifference = -5;
+
+    // Act
+    int result = calculator.subtract(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedDifference));
+}
+
+TEST_F(CalculatorTest, Multiply_PositiveNumbers_ReturnsCorrectProduct)
+{
+    // Arrange
+    int firstValue = 3;
+    int secondValue = 4;
+    int expectedProduct = 12;
+
+    // Act
+    int result = calculator.multiply(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedProduct));
+}
+
+TEST_F(CalculatorTest, Multiply_NegativeAndPositive_ReturnsCorrectProduct)
+{
+    // Arrange
+    int firstValue = -2;
+    int secondValue = 5;
+    int expectedProduct = -10;
+
+    // Act
+    int result = calculator.multiply(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedProduct));
+}
+
+TEST_F(CalculatorTest, Multiply_WithZero_ReturnsZero)
+{
+    // Arrange
+    int firstValue = 0;
+    int secondValue = 100;
+    int expectedProduct = 0;
+
+    // Act
+    int result = calculator.multiply(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedProduct));
+}
+
+TEST_F(CalculatorTest, Divide_EvenDivision_ReturnsCorrectQuotient)
+{
+    // Arrange
+    int firstValue = 10;
+    int secondValue = 2;
+    double expectedQuotient = 5.0;
+
+    // Act
+    double result = calculator.divide(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, DoubleEq(expectedQuotient));
+}
+
+TEST_F(CalculatorTest, Divide_WithRemainder_ReturnsCorrectQuotient)
+{
+    // Arrange
+    int firstValue = 7;
+    int secondValue = 2;
+    double expectedQuotient = 3.5;
+
+    // Act
+    double result = calculator.divide(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, DoubleEq(expectedQuotient));
+}
+
+TEST_F(CalculatorTest, Divide_NegativeNumber_ReturnsCorrectQuotient)
+{
+    // Arrange
+    int firstValue = -10;
+    int secondValue = 2;
+    double expectedQuotient = -5.0;
+
+    // Act
+    double result = calculator.divide(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, DoubleEq(expectedQuotient));
+}
+
+TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException)
+{
+    // Arrange
+    int firstValue = 10;
+    int secondValue = 0;
+
+    // Act & Assert
+    EXPECT_THAT([&]() { return calculator.divide(firstValue, secondValue); }, Throws<std::invalid_argument>());
+}
 
 class MockCalculator
 {
@@ -49,11 +200,19 @@ class MockCalculator
     MOCK_METHOD(int, subtract, (int firstValue, int secondValue));
 };
 
-TEST(MockCalculatorTest, MockExample)
+TEST(MockCalculatorTest, Add_WithMock_ReturnsExpectedValue)
 {
+    // Arrange
     MockCalculator mockCalculator;
+    int firstValue = 2;
+    int secondValue = 3;
+    int expectedResult = 5;
 
-    EXPECT_CALL(mockCalculator, add(2, 3)).WillOnce(::testing::Return(5));
+    EXPECT_CALL(mockCalculator, add(firstValue, secondValue)).WillOnce(::testing::Return(expectedResult));
 
-    EXPECT_EQ(mockCalculator.add(2, 3), 5);
+    // Act
+    int result = mockCalculator.add(firstValue, secondValue);
+
+    // Assert
+    EXPECT_THAT(result, Eq(expectedResult));
 }
