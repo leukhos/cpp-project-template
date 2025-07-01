@@ -19,8 +19,8 @@ This document provides comprehensive coding standards for Claude Code when worki
 - Example: `BM_Addition`, `BM_LargeVectorSort`
 
 ### Formatting
-- Microsoft style (clang-format)
-- Left pointer alignment (`int* ptr`)
+- LLVM style (clang-format)
+- 2-space indentation
 - Run: `clang-format -i src/**/*.{cpp,h} include/**/*.h tests/**/*.cpp`
 
 ## Code Formatting
@@ -144,19 +144,18 @@ All tests MUST use the AAA pattern with explicit comments:
 **ALWAYS include AAA comments in tests:**
 
 ```cpp
-TEST_F(CalculatorTest, Add_PositiveNumbers_ReturnsCorrectSum)
-{
-    // Arrange
-    Calculator calculator;
-    int firstValue = 5;
-    int secondValue = 3;
-    int expected = 8;
-    
-    // Act
-    int result = calculator.add(firstValue, secondValue);
-    
-    // Assert
-    EXPECT_EQ(result, expected);
+TEST_F(CalculatorTest, Add_PositiveNumbers_ReturnsCorrectSum) {
+  // Arrange
+  Calculator calculator;
+  int firstValue = 5;
+  int secondValue = 3;
+  int expected = 8;
+
+  // Act
+  int result = calculator.add(firstValue, secondValue);
+
+  // Assert
+  EXPECT_THAT(result, Eq(expected));
 }
 ```
 
@@ -169,13 +168,12 @@ TEST_F(CalculatorTest, Add_PositiveNumbers_ReturnsCorrectSum)
 ### Exception Testing
 When testing exceptions, be specific about the expected exception type:
 ```cpp
-TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException)
-{
-    // Arrange
-    Calculator calculator;
-    
-    // Act & Assert
-    EXPECT_THROW(calculator.divide(10, 0), std::invalid_argument);
+TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException) {
+  // Arrange
+  Calculator calculator;
+
+  // Act & Assert
+  EXPECT_THAT([&]() { return calculator.divide(10, 0); }, Throws<std::invalid_argument>());
 }
 ```
 
@@ -228,24 +226,22 @@ using ::testing::Throws;
 ### Test Data Management
 ```cpp
 // Good: Use meaningful constants
-TEST_F(CalculatorTest, Add_LargeNumbers_ReturnsCorrectSum)
-{
-    // Arrange
-    const int firstLargeNumber = 999999;
-    const int secondLargeNumber = 888888;
-    const int expectedSum = 1888887;
-    
-    // Act
-    int result = calculator.add(firstLargeNumber, secondLargeNumber);
-    
-    // Assert
-    EXPECT_EQ(result, expectedSum);
+TEST_F(CalculatorTest, Add_LargeNumbers_ReturnsCorrectSum) {
+  // Arrange
+  const int firstLargeNumber = 999999;
+  const int secondLargeNumber = 888888;
+  const int expectedSum = 1888887;
+
+  // Act
+  int result = calculator.add(firstLargeNumber, secondLargeNumber);
+
+  // Assert
+  EXPECT_THAT(result, Eq(expectedSum));
 }
 
 // Avoid: Magic numbers without context
-TEST_F(CalculatorTest, Add_Numbers_ReturnsSum)
-{
-    EXPECT_EQ(calculator.add(42, 17), 59); // What's special about 42 and 17?
+TEST_F(CalculatorTest, Add_Numbers_ReturnsSum) {
+  EXPECT_THAT(calculator.add(42, 17), Eq(59)); // What's special about 42 and 17?
 }
 ```
 
@@ -265,16 +261,14 @@ static void BM_DatabaseQuery_WithIndex(benchmark::State& state)
 - Use the `state` parameter to control iterations
 
 ```cpp
-static void BM_Addition(benchmark::State& state)
-{
-    // Arrange (outside timing loop)
-    Calculator calc;
-    
-    // Act (timed loop)
-    for (auto _ : state)
-    {
-        benchmark::DoNotOptimize(calc.add(42, 17));
-    }
+static void BM_Addition(benchmark::State& state) {
+  // Arrange (outside timing loop)
+  Calculator calc;
+
+  // Act (timed loop)
+  for (auto _ : state) {
+    benchmark::DoNotOptimize(calc.add(42, 17));
+  }
 }
 ```
 
@@ -294,25 +288,23 @@ BENCHMARK(BM_StringProcessing)->Args({8, 32})->Args({64, 128});
 
 ### Complex Benchmark Example
 ```cpp
-static void BM_ComplexOperation_WithSetup(benchmark::State& state)
-{
-    // Expensive setup outside timing loop
-    std::vector<int> data(state.range(0));
-    std::iota(data.begin(), data.end(), 1);
-    
-    for (auto _ : state)
-    {
-        state.PauseTiming();
-        // Reset state if needed
-        std::shuffle(data.begin(), data.end(), std::mt19937{42});
-        state.ResumeTiming();
-        
-        // The operation being benchmarked
-        benchmark::DoNotOptimize(std::sort(data.begin(), data.end()));
-    }
-    
-    // Optional: Set bytes processed or items processed
-    state.SetItemsProcessed(state.iterations() * state.range(0));
+static void BM_ComplexOperation_WithSetup(benchmark::State& state) {
+  // Expensive setup outside timing loop
+  std::vector<int> data(state.range(0));
+  std::iota(data.begin(), data.end(), 1);
+
+  for (auto _ : state) {
+    state.PauseTiming();
+    // Reset state if needed
+    std::shuffle(data.begin(), data.end(), std::mt19937{42});
+    state.ResumeTiming();
+
+    // The operation being benchmarked
+    benchmark::DoNotOptimize(std::sort(data.begin(), data.end()));
+  }
+
+  // Optional: Set bytes processed or items processed
+  state.SetItemsProcessed(state.iterations() * state.range(0));
 }
 BENCHMARK(BM_ComplexOperation_WithSetup)->Range(1000, 100000);
 ```
