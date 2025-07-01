@@ -1,4 +1,1 @@
-BasedOnStyle: Microsoft
-AllowShortFunctionsOnASingleLine: true
-DerivePointerAlignment: false
-PointerAlignment: Left
+BasedOnStyle: LLVM
