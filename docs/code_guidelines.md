@@ -25,12 +25,12 @@ This document provides comprehensive coding standards for Claude Code when worki
 
 ## Code Formatting
 
-The project uses `clang-format` with Microsoft style as the base configuration. The specific formatting rules are defined in `.clang-format`:
+The project uses `clang-format` with LLVM style as the base configuration. The specific formatting rules are defined in `.clang-format`:
 
-- **Base Style**: Microsoft
-- **Short Functions**: Allowed on a single line
-- **Pointer Alignment**: Left-aligned (`int* ptr` not `int *ptr`)
-- **Pointer Alignment Derivation**: Disabled (consistent left alignment)
+- **Base Style**: LLVM
+- **Indentation**: 2 spaces (LLVM default)
+- **Brace Style**: Attach (LLVM default)
+- **Line Length**: 80 characters (LLVM default)
 
 **IMPORTANT**: Always run clang-format before committing:
 ```bash
