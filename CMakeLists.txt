@@ -1,38 +1,28 @@
 cmake_minimum_required(VERSION 3.28)
-project(cpp-project-template VERSION 1.0.0 LANGUAGES CXX)
+project(calculator VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    set(CMAKE_CXX_EXTENSIONS OFF)
-    set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-    include(CTest)
-endif()
 
 include(FetchContent)
 
 # Gather source files (exclude main.cpp from library)
-file(GLOB LIB_SOURCES src/*.cpp src/*.h include/*.h)
-list(REMOVE_ITEM LIB_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+file(GLOB LIB_SOURCES src/*.cpp src/*.h include/${PROJECT_NAME}/*.h)
 
-# Main library
-add_library(cpp_project_template ${LIB_SOURCES})
+add_library(${PROJECT_NAME} ${LIB_SOURCES})
 
-target_include_directories(cpp_project_template
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+target_include_directories(${PROJECT_NAME}
+    INTERFACE
+        include
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        include/${PROJECT_NAME}
+        src
 )
 
-# Main executable
-add_executable(main src/main.cpp)
-target_link_libraries(main cpp_project_template)
-
 # Testing
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+if(BUILD_TESTING)
+    include(CTest)
+
     FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
@@ -45,16 +35,16 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     # Test sources
     file(GLOB TEST_SOURCES tests/*.cpp tests/*.h)
     
-    add_executable(calculator_tests ${TEST_SOURCES})
+    add_executable(${PROJECT_NAME}-tests ${TEST_SOURCES})
     
-    target_link_libraries(calculator_tests
-        cpp_project_template
+    target_link_libraries(${PROJECT_NAME}-tests
+        ${PROJECT_NAME}
         gtest_main
         gmock_main
     )
     
     include(GoogleTest)
-    gtest_discover_tests(calculator_tests)
+    gtest_discover_tests(${PROJECT_NAME}-tests)
 endif()
 
 # Benchmarks
