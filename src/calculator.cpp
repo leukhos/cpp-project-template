@@ -1,5 +1,5 @@
 // First-party headers
-#include "calculator.h"
+#include "calculator/calculator.h"
 
 // Standard library headers
 #include <stdexcept>

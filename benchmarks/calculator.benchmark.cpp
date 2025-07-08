@@ -1,5 +1,5 @@
 // First-party headers
-#include "calculator.h"
+#include "calculator/calculator.h"
 
 // Third-party headers
 #include <benchmark/benchmark.h>
