@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Gather source files (exclude main.cpp from library)
 file(GLOB LIB_SOURCES src/*.cpp src/*.h include/${PROJECT_NAME}/*.h)
 
+# Use File Sets and target_sources to define header files?
 add_library(${PROJECT_NAME} ${LIB_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
