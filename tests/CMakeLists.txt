@@ -1,11 +1,15 @@
 find_package(GTest CONFIG REQUIRED)
 
-file(GLOB TEST_SOURCES *.cpp *.h)
-add_executable(${PROJECT_NAME}-tests ${TEST_SOURCES})
-
-target_link_libraries(${PROJECT_NAME}-tests
+add_executable(calculator-tests)
+target_sources(calculator-tests
     PRIVATE
-        ${PROJECT_NAME}
+        main.cpp
+        calculator.test.cpp
+)
+
+target_link_libraries(calculator-tests
+    PRIVATE
+        calculator
         GTest::gtest
         GTest::gtest_main
         GTest::gmock
@@ -13,4 +17,4 @@ target_link_libraries(${PROJECT_NAME}-tests
 )
 
 include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}-tests)
+gtest_discover_tests(calculator-tests)

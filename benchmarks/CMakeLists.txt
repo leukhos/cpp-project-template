@@ -9,12 +9,14 @@ FetchContent_Declare(
 set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(benchmark)
 
-# Benchmark sources
-file(GLOB BENCHMARK_SOURCES benchmarks/*.cpp benchmarks/*.h)
+add_executable(calculator-benchmarks)
 
-add_executable(${PROJECT_NAME}-benchmarks ${BENCHMARK_SOURCES})
+target_sources(calculator-benchmarks
+    PRIVATE
+        calculator.benchmark.cpp
+)
 
-target_link_libraries(${PROJECT_NAME}-benchmarks
-    ${PROJECT_NAME}
+target_link_libraries(calculator-benchmarks
+    calculator
     benchmark::benchmark
 )

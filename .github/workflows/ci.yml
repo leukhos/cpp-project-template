@@ -34,14 +34,14 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Cache FetchContent dependencies
+    - name: Cache vcpkg dependencies
       uses: actions/cache@v4
       with:
         path: |
-          ${{ steps.strings.outputs.build-output-dir }}/_deps
-        key: ${{ runner.os }}-deps-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+          ${{ steps.strings.outputs.build-output-dir }}/vcpkg_installed
+        key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json') }}
         restore-keys: |
-          ${{ runner.os }}-deps-
+          ${{ runner.os }}-vcpkg-
 
     - name: Cache CMake configuration
       uses: actions/cache@v4
@@ -49,15 +49,13 @@ jobs:
         path: |
           ${{ steps.strings.outputs.build-output-dir }}/CMakeCache.txt
           ${{ steps.strings.outputs.build-output-dir }}/CMakeFiles
-        key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+        key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt', 'vcpkg.json') }}
         restore-keys: |
           ${{ runner.os }}-cmake-
 
     - name: Configure CMake
       run: >
-        cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        cmake --preset vcpkg
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -S ${{ github.workspace }}
 
