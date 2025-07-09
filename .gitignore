@@ -1,5 +1,6 @@
 .claude
 .vscode
 
-# Build directory
+# CMake directory
 build
+CMakeUserPresets.json
