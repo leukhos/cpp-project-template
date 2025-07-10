@@ -1,5 +1,6 @@
-# Claude AI
 .claude
+.vscode
 
-# Build directory
+# CMake directory
 build
+CMakeUserPresets.json
