@@ -2,6 +2,13 @@
 
 A modern C++ project template with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
+## Todo
+- Add some compiler warning setup
+- Add a devcontainer
+- Update the documentation, with a CLAUDE.md template
+- Consider function defined for testing purpose only
+- Review testing mechanism (for multi-project cases)
+
 ## Features
 
 - **CMake Build System**: Modern CMake (3.14+) with proper target-based configuration
