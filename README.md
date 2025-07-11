@@ -8,6 +8,7 @@ A modern C++ project template with CMake build system, GoogleTest/GoogleMock tes
 - Update the documentation, with a CLAUDE.md template
 - Consider function defined for testing purpose only
 - Review testing mechanism (for multi-project cases)
+- Limit gtest to test with `VCPKG_MANIFEST_FEATURES`
 
 ## Features
 
