@@ -17,6 +17,8 @@ target_sources(calculator-benchmarks
 )
 
 target_link_libraries(calculator-benchmarks
-    calculator
-    benchmark::benchmark
+    PRIVATE
+        calculator
+        project_warnings
+        benchmark::benchmark
 )

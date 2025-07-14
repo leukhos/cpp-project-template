@@ -10,6 +10,7 @@ target_sources(calculator-tests
 target_link_libraries(calculator-tests
     PRIVATE
         calculator
+        project_warnings
         GTest::gtest
         GTest::gtest_main
         GTest::gmock
