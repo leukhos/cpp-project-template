@@ -18,16 +18,13 @@ jobs:
         build_type: [Release]
         include:
           - os: ubuntu-latest
-            c_compiler: gcc
-            cpp_compiler: g++
+            cmake_preset: gcc-release
             vcpkg_root: /usr/local/share/vcpkg
           - os: macos-latest
-            c_compiler: clang
-            cpp_compiler: clang++
+            cmake_preset: clang-release
             vcpkg_root: /usr/local/share/vcpkg
           - os: windows-latest
-            c_compiler: cl
-            cpp_compiler: cl
+            cmake_preset: msvc-release
             vcpkg_root: C:/vcpkg
 
     steps:
@@ -54,12 +51,11 @@ jobs:
           ${{ runner.os }}-cmake-
 
     - name: Configure CMake
+      env:
+        CMAKE_TOOLCHAIN_FILE: ${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
       run: >
-        cmake -B ${{ env.BUILD_DIR }}
-        -DCMAKE_TOOLCHAIN_FILE=${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        cmake --preset ${{ matrix.cmake_preset }} --no-warn-unused-cli 
+        -B ${{ env.BUILD_DIR }} 
         -S ${{ github.workspace }}
 
     - name: Build

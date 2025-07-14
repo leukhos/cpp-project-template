@@ -7,7 +7,6 @@
 
 using ::testing::DoubleEq;
 using ::testing::Eq;
-using ::testing::Throws;
 
 class CalculatorTest : public ::testing::Test {
 protected:
@@ -176,8 +175,8 @@ TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException) {
   int secondValue = 0;
 
   // Act & Assert
-  EXPECT_THAT([&]() { return calculator.divide(firstValue, secondValue); },
-              Throws<std::invalid_argument>());
+  EXPECT_THROW(calculator.divide(firstValue, secondValue),
+               std::invalid_argument);
 }
 
 class MockCalculator {
