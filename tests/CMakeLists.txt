@@ -1,16 +1,15 @@
-find_package(GTest CONFIG REQUIRED)
+find_package(GTest REQUIRED)
 
-add_executable(calculator-tests)
-target_sources(calculator-tests
+add_executable(calculator_tests)
+target_sources(calculator_tests
     PRIVATE
         main.cpp
         calculator.test.cpp
 )
 
-target_link_libraries(calculator-tests
+target_link_libraries(calculator_tests
     PRIVATE
         calculator
-        project_warnings
         GTest::gtest
         GTest::gtest_main
         GTest::gmock
@@ -18,4 +17,4 @@ target_link_libraries(calculator-tests
 )
 
 include(GoogleTest)
-gtest_discover_tests(calculator-tests)
+gtest_discover_tests(calculator_tests)
