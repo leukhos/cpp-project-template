@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   BUILD_DIR: ${{ github.workspace }}/build
@@ -18,53 +18,52 @@ jobs:
         build_type: [Release]
         include:
           - os: ubuntu-latest
-            c_compiler: gcc
-            cpp_compiler: g++
+            cmake_preset: gcc-release
             vcpkg_root: /usr/local/share/vcpkg
+            generator: "Unix Makefiles"
           - os: macos-latest
-            c_compiler: clang
-            cpp_compiler: clang++
+            cmake_preset: clang-release
             vcpkg_root: /usr/local/share/vcpkg
+            generator: "Unix Makefiles"
           - os: windows-latest
-            c_compiler: cl
-            cpp_compiler: cl
+            cmake_preset: msvc-release
             vcpkg_root: C:/vcpkg
+            generator: "Visual Studio 17 2022"
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Cache vcpkg dependencies
-      uses: actions/cache@v4
-      with:
-        path: |
-          ${{ env.BUILD_DIR }}/vcpkg_installed
-        key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json') }}
-        restore-keys: |
-          ${{ runner.os }}-vcpkg-
+      - name: Cache vcpkg dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.BUILD_DIR }}/vcpkg_installed
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
 
-    - name: Cache CMake configuration
-      uses: actions/cache@v4
-      with:
-        path: |
-          ${{ env.BUILD_DIR }}/CMakeCache.txt
-          ${{ env.BUILD_DIR }}/CMakeFiles
-        key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt', 'vcpkg.json') }}
-        restore-keys: |
-          ${{ runner.os }}-cmake-
+      - name: Cache CMake configuration
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.BUILD_DIR }}/CMakeCache.txt
+            ${{ env.BUILD_DIR }}/CMakeFiles
+          key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt', 'vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-
 
-    - name: Configure CMake
-      run: >
-        cmake -B ${{ env.BUILD_DIR }}
-        -DCMAKE_TOOLCHAIN_FILE=${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -S ${{ github.workspace }}
+      - name: Configure CMake
+        run: >
+          cmake --preset ${{ matrix.cmake_preset }}
+          -G "${{ matrix.generator }}"
+          --toolchain ${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
+          -B ${{ env.BUILD_DIR }} 
+          -S ${{ github.workspace }}
 
-    - name: Build
-      run: cmake --build ${{ env.BUILD_DIR }} --config ${{ matrix.build_type }}
+      - name: Build
+        run: cmake --build ${{ env.BUILD_DIR }} --config ${{ matrix.build_type }}
 
-    - name: Test
-      working-directory: ${{ env.BUILD_DIR }}
-      run: ctest --build-config ${{ matrix.build_type }} --output-on-failure
+      - name: Test
+        working-directory: ${{ env.BUILD_DIR }}
+        run: ctest --build-config ${{ matrix.build_type }} --output-on-failure

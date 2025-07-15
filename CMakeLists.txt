@@ -1,29 +1,15 @@
-cmake_minimum_required(VERSION 3.23)
-project(calculator VERSION 0.1.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.25)
+project(calculator)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory(src)
 
-add_library(calculator)
-
-target_sources(calculator
-    PRIVATE
-        src/calculator.cpp
-    PUBLIC
-        FILE_SET HEADERS
-        BASE_DIRS include
-        FILES
-            include/calculator/calculator.h
-)
-
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+option(CALCULATOR_BUILD_TESTS "Build tests for the calculator library" ON)
+if(CALCULATOR_BUILD_TESTS)
     include(CTest)
-    if(BUILD_TESTING)
-        add_subdirectory(tests)
-    endif()
+    add_subdirectory(tests)
+endif()
 
-    option(ENABLE_BENCHMARKS "Build benchmark executables" OFF)
-    if(ENABLE_BENCHMARKS)
-        add_subdirectory(benchmarks)
-    endif()
+option(CALCULATOR_BUILD_BENCHMARKS "Build benchmark executables" OFF)
+if(CALCULATOR_BUILD_BENCHMARKS)
+    add_subdirectory(benchmarks)
 endif()

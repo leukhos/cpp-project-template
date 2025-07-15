@@ -3,12 +3,12 @@
 A modern C++ project template with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
 ## Todo
-- Add some compiler warning setup
-- Add a devcontainer
-- Update the documentation, with a CLAUDE.md template
-- Consider function defined for testing purpose only
-- Review testing mechanism (for multi-project cases)
 - Limit gtest to test with `VCPKG_MANIFEST_FEATURES`
+- Add a devcontainer
+- Update the documentation (testing guideline EXPECT_THROW), with a CLAUDE.md template
+- Consider function defined for testing purpose only
+- Clean the all project
+- Ninja Multi-config ?
 
 ## Features
 
@@ -46,7 +46,7 @@ cpp-project-template/
 
 ### Prerequisites
 
-- CMake 3.28 or higher
+- CMake 3.23 or higher
 - C++20 compatible compiler (GCC 10+, Clang 10+, MSVC 2019+)
 
 ### Basic Build
