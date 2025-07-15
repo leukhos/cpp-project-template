@@ -9,16 +9,12 @@
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
                 "CALCULATOR_BUILD_TESTS": "ON",
-                "CALCULATOR_BUILD_BENCHMARKS": "OFF"
-            },
-            "warnings": {
-                "dev": true,
-                "unusedCli": false
+                "VCPKG_MANIFEST_FEATURES": "tests"
             }
         },
         {
             "name": "gcc",
-            "displayName": "GCC",
+            "displayName": "GCC (Ninja Multi-Config)",
             "description": "Build configuration using GCC compiler with Ninja Multi-Config generator and vcpkg toolchain",
             "inherits": "default",
             "cacheVariables": {
@@ -30,7 +26,7 @@
         },
         {
             "name": "clang",
-            "displayName": "Clang",
+            "displayName": "Clang (Ninja Multi-Config)",
             "description": "Build configuration using Clang compiler with Ninja Multi-Config generator and vcpkg toolchain",
             "inherits": "default",
             "cacheVariables": {
@@ -42,7 +38,7 @@
         },
         {
             "name": "msvc",
-            "displayName": "MSVC",
+            "displayName": "MSVC (Ninja Multi-Config)",
             "description": "Build configuration using MSVC compiler with Ninja Multi-Config generator and vcpkg toolchain",
             "condition": {
                 "type": "equals",
