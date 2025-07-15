@@ -18,17 +18,14 @@ jobs:
         build_type: [Release]
         include:
           - os: ubuntu-latest
-            cmake_preset: gcc-release
+            cmake_preset: gcc
             vcpkg_root: /usr/local/share/vcpkg
-            generator: "Unix Makefiles"
           - os: macos-latest
-            cmake_preset: clang-release
+            cmake_preset: clang
             vcpkg_root: /usr/local/share/vcpkg
-            generator: "Unix Makefiles"
           - os: windows-latest
-            cmake_preset: msvc-release
+            cmake_preset: msvc-msbuild
             vcpkg_root: C:/vcpkg
-            generator: "Visual Studio 17 2022"
 
     steps:
       - name: Checkout code
@@ -56,7 +53,6 @@ jobs:
       - name: Configure CMake
         run: >
           cmake --preset ${{ matrix.cmake_preset }}
-          -G "${{ matrix.generator }}"
           --toolchain ${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
           -B ${{ env.BUILD_DIR }} 
           -S ${{ github.workspace }}

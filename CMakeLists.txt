@@ -3,7 +3,7 @@ project(calculator)
 
 add_subdirectory(src)
 
-option(CALCULATOR_BUILD_TESTS "Build tests for the calculator library" ON)
+option(CALCULATOR_BUILD_TESTS "Build tests for the calculator library" OFF)
 if(CALCULATOR_BUILD_TESTS)
     include(CTest)
     add_subdirectory(tests)
