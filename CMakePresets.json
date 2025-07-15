@@ -9,7 +9,7 @@
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
                 "CALCULATOR_BUILD_TESTS": "ON",
-                "CALCULATOR_BUILD_BENCHMARKS": "OFF"
+                "VCPKG_MANIFEST_FEATURES": "tests"
             },
             "warnings": {
                 "dev": true,

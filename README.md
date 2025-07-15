@@ -3,12 +3,10 @@
 A modern C++ project template with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
 ## Todo
-- Limit gtest to test with `VCPKG_MANIFEST_FEATURES`
 - Add a devcontainer
 - Update the documentation (testing guideline EXPECT_THROW), with a CLAUDE.md template
 - Consider function defined for testing purpose only
 - Clean the all project
-- Ninja Multi-config ?
 
 ## Features
 

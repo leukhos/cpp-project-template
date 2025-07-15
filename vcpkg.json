@@ -1,6 +1,11 @@
 {
-  "dependencies": [
-    "gtest",
-    "benchmark"
-  ]
+  "name": "calculator",
+  "features": {
+    "tests": {
+      "dependencies": [ "gtest" ]
+    },
+    "benchmarks": {
+      "dependencies": [ "benchmark" ]
+    }
+  }
 }
