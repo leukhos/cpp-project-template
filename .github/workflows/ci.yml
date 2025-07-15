@@ -18,13 +18,10 @@ jobs:
         include:
           - os: ubuntu-latest
             cmake_preset: gcc-release
-            vcpkg_root: /usr/local/share/vcpkg
           - os: macos-latest
             cmake_preset: clang-release
-            vcpkg_root: /usr/local/share/vcpkg
           - os: windows-latest
             cmake_preset: msvc-release
-            vcpkg_root: C:/vcpkg
 
     steps:
     - name: Checkout code
@@ -51,7 +48,7 @@ jobs:
 
     - name: Configure CMake
       env:
-        CMAKE_TOOLCHAIN_FILE: ${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
+        VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
       run: >
         cmake --preset ${{ matrix.cmake_preset }}
         -B ${{ env.BUILD_DIR }} 
