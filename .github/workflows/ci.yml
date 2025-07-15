@@ -47,10 +47,9 @@ jobs:
           ${{ runner.os }}-cmake-
 
     - name: Configure CMake
-      env:
-        VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
       run: >
         cmake --preset ${{ matrix.cmake_preset }}
+        -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_INSTALLATION_ROOT }}/scripts/buildsystems/vcpkg.cmake
         -B ${{ env.BUILD_DIR }} 
         -S ${{ github.workspace }}
 
