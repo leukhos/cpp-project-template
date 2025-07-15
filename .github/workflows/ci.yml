@@ -15,7 +15,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        build_type: [Release]
         include:
           - os: ubuntu-latest
             cmake_preset: gcc-release
@@ -54,13 +53,13 @@ jobs:
       env:
         CMAKE_TOOLCHAIN_FILE: ${{ matrix.vcpkg_root }}/scripts/buildsystems/vcpkg.cmake
       run: >
-        cmake --preset ${{ matrix.cmake_preset }} --no-warn-unused-cli 
+        cmake --preset ${{ matrix.cmake_preset }}
         -B ${{ env.BUILD_DIR }} 
         -S ${{ github.workspace }}
 
     - name: Build
-      run: cmake --build ${{ env.BUILD_DIR }} --config ${{ matrix.build_type }}
+      run: cmake --build ${{ env.BUILD_DIR }}
 
     - name: Test
       working-directory: ${{ env.BUILD_DIR }}
-      run: ctest --build-config ${{ matrix.build_type }} --output-on-failure
+      run: ctest --output-on-failure
