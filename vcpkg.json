@@ -2,13 +2,13 @@
   "name": "calculator",
   "features": {
     "benchmarks": {
-      "description": "Enable benchmarks using GoogleBenchmark framework",
+      "description": "Build benchmarks",
       "dependencies": [
         "benchmark"
       ]
     },
     "tests": {
-      "description": "Enable tests using GoogleTest framework",
+      "description": "Build tests",
       "dependencies": [
         "gtest"
       ]
