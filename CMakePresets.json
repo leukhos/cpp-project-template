@@ -4,18 +4,19 @@
         {
             "name": "default",
             "hidden": true,
-            "generator": "Ninja Multi-Config",
+            "generator": "Ninja",
             "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
                 "CALCULATOR_BUILD_TESTS": "ON",
                 "VCPKG_MANIFEST_FEATURES": "tests"
             }
         },
         {
             "name": "gcc",
-            "displayName": "GCC (Ninja Multi-Config)",
-            "description": "Build configuration using GCC compiler with Ninja Multi-Config generator and vcpkg toolchain",
+            "displayName": "GCC",
+            "description": "Build configuration using GCC compiler with Ninja generator and vcpkg toolchain",
             "inherits": "default",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
@@ -26,8 +27,8 @@
         },
         {
             "name": "clang",
-            "displayName": "Clang (Ninja Multi-Config)",
-            "description": "Build configuration using Clang compiler with Ninja Multi-Config generator and vcpkg toolchain",
+            "displayName": "Clang",
+            "description": "Build configuration using Clang compiler with Ninja generator and vcpkg toolchain",
             "inherits": "default",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
@@ -38,8 +39,8 @@
         },
         {
             "name": "msvc",
-            "displayName": "MSVC (Ninja Multi-Config)",
-            "description": "Build configuration using MSVC compiler with Ninja Multi-Config generator and vcpkg toolchain",
+            "displayName": "MSVC (Ninja)",
+            "description": "Build configuration using MSVC compiler with Ninja generator and vcpkg toolchain",
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
