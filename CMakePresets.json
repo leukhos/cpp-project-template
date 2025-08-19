@@ -4,7 +4,6 @@
         {
             "name": "default",
             "hidden": true,
-            "generator": "Ninja",
             "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
@@ -16,7 +15,7 @@
         {
             "name": "gcc",
             "displayName": "GCC",
-            "description": "Build configuration using GCC compiler with Ninja generator and vcpkg toolchain",
+            "description": "Build configuration using GCC compiler and vcpkg toolchain",
             "inherits": "default",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
@@ -28,7 +27,7 @@
         {
             "name": "clang",
             "displayName": "Clang",
-            "description": "Build configuration using Clang compiler with Ninja generator and vcpkg toolchain",
+            "description": "Build configuration using Clang compiler and vcpkg toolchain",
             "inherits": "default",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
@@ -39,8 +38,8 @@
         },
         {
             "name": "msvc",
-            "displayName": "MSVC (Ninja)",
-            "description": "Build configuration using MSVC compiler with Ninja generator and vcpkg toolchain",
+            "displayName": "MSVC",
+            "description": "Build configuration using MSVC compiler and vcpkg toolchain",
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
@@ -53,13 +52,6 @@
                 "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc",
                 "CMAKE_C_FLAGS": "/W4 /permissive-"
             }
-        },
-        {
-            "name": "msvc-msbuild",
-            "displayName": "MSVC (MSBuild)",
-            "description": "Build configuration using MSVC compiler with MSBuild generator and vcpkg toolchain",
-            "inherits": "msvc",
-            "generator": "Visual Studio 17 2022"
         }
     ]
 }

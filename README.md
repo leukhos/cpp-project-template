@@ -44,7 +44,7 @@ cpp-project-template/
 
 ### Prerequisites
 
-- CMake 3.23 or higher
+- CMake 3.25 or higher (FILE_SET)
 - C++20 compatible compiler (GCC 10+, Clang 10+, MSVC 2019+)
 
 ### Basic Build
