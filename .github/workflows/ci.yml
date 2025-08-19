@@ -24,7 +24,7 @@ jobs:
             cmake_preset: clang
             vcpkg_root: /usr/local/share/vcpkg
           - os: windows-latest
-            cmake_preset: msvc-msbuild
+            cmake_preset: msvc
             vcpkg_root: C:/vcpkg
 
     steps:
