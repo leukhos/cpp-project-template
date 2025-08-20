@@ -1,111 +1,60 @@
 # C++ Project Template
 
-A modern C++ project template with CMake build system, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
-
-## Todo
-- Add a devcontainer
-- Update the documentation (testing guideline EXPECT_THROW), with a CLAUDE.md template
-- Consider function defined for testing purpose only
-- Clean the all project
+A modern C++ project template with CMake build system, vcpkg dependency management, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
 ## Features
 
-- **CMake Build System**: Modern CMake (3.14+) with proper target-based configuration
+- **CMake Build System**: Modern CMake (3.25+) with FILE_SET support and target-based configuration
+- **vcpkg Integration**: Automatic dependency management with CMake presets
 - **Testing**: GoogleTest and GoogleMock integration with automatic test discovery
 - **Benchmarking**: Google Benchmark for performance testing
-- **Dependencies**: Automatic dependency management using CMake FetchContent
 - **Modern C++**: C++20 standard with comprehensive compiler warnings
+- **Multi-Compiler Support**: CMake presets for GCC, Clang, and MSVC
+- **Continuous Integration**: GitHub Actions CI testing across Ubuntu, macOS, and Windows with intelligent caching
+- **Code Standards**: Comprehensive coding guidelines and naming conventions
+- **Development Container**: Ready-to-use devcontainer configuration
 
 ## Project Structure
 
 ```
 cpp-project-template/
-├── CMakeLists.txt          # Main CMake configuration
-├── src/                    # Source files
-│   ├── CMakeLists.txt
-│   ├── calculator.cpp      # Example implementation
-│   └── main.cpp           # Example main executable
-├── include/                # Header files
-│   └── calculator.h       # Example header
-├── tests/                  # Unit tests
-│   ├── CMakeLists.txt
-│   └── calculator.test.cpp # Example GoogleTest/GoogleMock tests
-├── benchmarks/             # Performance benchmarks
-│   ├── CMakeLists.txt
+├── CMakeLists.txt              # Main CMake configuration
+├── CMakePresets.json           # CMake presets for different compilers
+├── vcpkg.json                  # vcpkg dependencies manifest
+├── vcpkg-configuration.json    # vcpkg configuration
+├── CLAUDE.md                   # Claude Code guidance document
+├── src/                        # Source files and headers
+│   ├── CMakeLists.txt          # Library target configuration
+│   ├── calculator.cpp          # Example implementation
+│   ├── include/calculator/     # Public headers (FILE_SET)
+│   │   └── calculator.h        # Example header
+│   └── cmake/                  # CMake package configuration
+│       └── calculatorConfig.cmake
+├── tests/                      # Unit tests
+│   ├── CMakeLists.txt          # Test executable configuration
+│   ├── main.cpp               # Test runner main
+│   └── calculator.test.cpp    # Example GoogleTest/GoogleMock tests
+├── benchmarks/                 # Performance benchmarks
+│   ├── CMakeLists.txt          # Benchmark executable configuration
 │   └── calculator.benchmark.cpp # Example Google Benchmark tests
-├── docs/                   # Documentation
-│   ├── code_guidelines.md  # Coding standards and formatting rules
-│   └── naming_conventions.md # Naming convention guidelines
-└── cmake/                  # CMake utilities
-    └── CompilerWarnings.cmake # Compiler warning configuration
-```
-
-## Building
-
-### Prerequisites
-
-- CMake 3.25 or higher (FILE_SET)
-- C++20 compatible compiler (GCC 10+, Clang 10+, MSVC 2019+)
-
-### Basic Build
-
-```bash
-mkdir build && cd build
-cmake ..
-make
-```
-
-### Running the Example
-
-```bash
-./src/main
-```
-
-### Building with Tests
-
-```bash
-mkdir build && cd build
-cmake .. -DBUILD_TESTING=ON
-make
-```
-
-### Running Tests
-
-```bash
-make test
-# or
-ctest
-# or run directly
-./tests/calculator_test
-```
-
-### Building with Benchmarks
-
-```bash
-mkdir build && cd build
-cmake .. -DBUILD_BENCHMARKS=ON
-make
-```
-
-### Running Benchmarks
-
-```bash
-./benchmarks/calculator_benchmark
+└── docs/                       # Documentation
+    ├── code_guidelines.md      # Coding standards and formatting rules
+    └── naming_conventions.md   # Naming convention guidelines
 ```
 
 ## CMake Options
 
-- `BUILD_TESTING`: Enable/disable building tests (default: ON when this is the main project)
-- `BUILD_BENCHMARKS`: Enable/disable building benchmarks (default: OFF)
-- `WARNINGS_AS_ERRORS`: Treat compiler warnings as errors (default: TRUE)
+- `CALCULATOR_BUILD_TESTS`: Enable/disable building tests (default: OFF)
+- `CALCULATOR_BUILD_BENCHMARKS`: Enable/disable building benchmarks (default: OFF)
 
 ## Dependencies
 
-All dependencies are automatically fetched and built using CMake FetchContent:
+Dependencies are managed through vcpkg with feature-based configuration:
 
-- **GoogleTest**: v1.17.0 - Testing framework
-- **GoogleMock**: Included with GoogleTest - Mocking framework  
-- **Google Benchmark**: v1.9.4 - Performance benchmarking
+- **GoogleTest/GoogleMock**: Testing and mocking framework (vcpkg feature: `tests`)
+- **Google Benchmark**: Performance benchmarking (vcpkg feature: `benchmarks`)
+
+See `vcpkg.json` for the complete dependency configuration.
 
 ## Code Guidelines
 
@@ -119,10 +68,10 @@ This project follows strict coding standards:
 
 ### Code Formatting
 
-The project uses clang-format with Microsoft style:
+The project uses clang-format with LLVM style:
 
 ```bash
-clang-format -i src/**/*.{cpp,h} include/**/*.h tests/**/*.cpp
+clang-format -i src/**/*.{cpp,h} tests/**/*.cpp benchmarks/**/*.cpp
 ```
 
 ## Usage as Template
@@ -131,8 +80,10 @@ clang-format -i src/**/*.{cpp,h} include/**/*.h tests/**/*.cpp
 2. Replace the example calculator code with your own implementation
 3. Update the project name in `CMakeLists.txt`
 4. Modify the library name and source files in `src/CMakeLists.txt`
-5. Update tests and benchmarks following the naming conventions
-6. Follow the coding guidelines in `docs/` directory
+5. Update `vcpkg.json` with your specific dependencies
+6. Update tests and benchmarks following the naming conventions
+7. Follow the coding guidelines in `docs/` directory
+8. See `CLAUDE.md` for detailed development guidance
 
 ## License
 
