@@ -2,6 +2,10 @@
 
 This document provides mandatory naming standards for Claude Code when working with this C++ project.
 
+## Remarks
+
+- Consider `_t` suffix for Type aliases
+
 ## Quick Reference
 
 ### Most Common Patterns
@@ -32,7 +36,6 @@ This document provides mandatory naming standards for Claude Code when working w
 | **Lambda Variables** | camelCase | `processItem`, `filterData` | Capture variables |
 | **Structs** | PascalCase | `Point`, `Configuration` | Like classes |
 | **Struct Members** | camelCase | `connectionString`, `port` | **NO prefixes** |
-| **Unions** | PascalCase | `DataValue`, `MessageContent` | Like classes |
 | **Namespaces** | PascalCase | `DataProcessing`, `Networking` | Module names |
 | **Enums** | PascalCase | `enum class Colour { Red, Green }` | Use enum class |
 | **Templates** | PascalCase | `template<typename T, int Size>` | Type parameters |

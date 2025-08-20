@@ -2,6 +2,12 @@
 
 This document provides comprehensive coding standards for Claude Code when working with this C++ project.
 
+## Remarks
+
+- Need to update the clang-format command
+- Need to update the Benchmark naming to mimic more the unit est one
+- Maybe need to review the benchmark section to looks more like the testing one. For example, it can have some sense to use similar example in both. This might ensure that case identified in benchmark are properly testing in unit testing, and vice-versa
+
 ## Quick Reference
 
 ### Headers (Order & Grouping)
