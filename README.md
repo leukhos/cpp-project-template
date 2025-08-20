@@ -2,6 +2,14 @@
 
 A modern C++ project template with CMake build system, vcpkg dependency management, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
+## Modification to apply to the README
+- vcpkg is just an option provided to handled dependencies. The CMake project does not depends on vcpkg to manage the dependencies. This is only an option provided via CMake presets. The dependencies are loaded via CMake using FindPackage function, but no dependencies to vcpkg are included in the CMakeLists files. This is important to distinguish this. The project is not dependent on vcpkg, once again, I just provide a solution to handle the dependencies, but everyone can use the one he prefer. Same remarks for using the vcpkg features and manifest mode. The preset are using this, but these are only preset, and so no one is obliged to use it. Maybe a section can be required here on how to use the preset (take example on the ci.yml github action commands), specifying that this is not an obligation
+- In Features, rework the vcpkg entry, to explicit the fact that this is independent from the CMake project, just in preset. Mentioned the manifest mode
+- In Feature, mentioned that the devcontainer is based on microsoft one (nothing extraodinary here)
+- Rework the Dependencies section to remove the mention of vcpkg to focus on the real dependencies
+- Remove any CLAUDE.md reference
+- Remove the "Usage as a template" section, as it seems not relevant. 
+
 ## Features
 
 - **CMake Build System**: Modern CMake (3.25+) with FILE_SET support and target-based configuration
