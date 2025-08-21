@@ -15,189 +15,189 @@ protected:
 
 TEST_F(CalculatorTest, Add_PositiveNumbers_ReturnsCorrectSum) {
   // Arrange
-  int firstValue = 2;
-  int secondValue = 3;
-  int expectedSum = 5;
+  int first_value = 2;
+  int second_value = 3;
+  int expected_sum = 5;
 
   // Act
-  int result = calculator.add(firstValue, secondValue);
+  int result = calculator.add(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedSum));
+  EXPECT_THAT(result, Eq(expected_sum));
 }
 
 TEST_F(CalculatorTest, Add_LargePositiveNumbers_ReturnsCorrectSum) {
   // Arrange
-  int firstValue = 10;
-  int secondValue = 15;
-  int expectedSum = 25;
+  int first_value = 10;
+  int second_value = 15;
+  int expected_sum = 25;
 
   // Act
-  int result = calculator.add(firstValue, secondValue);
+  int result = calculator.add(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedSum));
+  EXPECT_THAT(result, Eq(expected_sum));
 }
 
 TEST_F(CalculatorTest, Add_NegativeNumbers_ReturnsCorrectSum) {
   // Arrange
-  int firstValue = -2;
-  int secondValue = -3;
-  int expectedSum = -5;
+  int first_value = -2;
+  int second_value = -3;
+  int expected_sum = -5;
 
   // Act
-  int result = calculator.add(firstValue, secondValue);
+  int result = calculator.add(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedSum));
+  EXPECT_THAT(result, Eq(expected_sum));
 }
 
 TEST_F(CalculatorTest, Add_MixedSignNumbers_ReturnsCorrectSum) {
   // Arrange
-  int firstValue = -10;
-  int secondValue = 5;
-  int expectedSum = -5;
+  int first_value = -10;
+  int second_value = 5;
+  int expected_sum = -5;
 
   // Act
-  int result = calculator.add(firstValue, secondValue);
+  int result = calculator.add(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedSum));
+  EXPECT_THAT(result, Eq(expected_sum));
 }
 
 TEST_F(CalculatorTest, Subtract_PositiveNumbers_ReturnsCorrectDifference) {
   // Arrange
-  int firstValue = 5;
-  int secondValue = 3;
-  int expectedDifference = 2;
+  int first_value = 5;
+  int second_value = 3;
+  int expected_difference = 2;
 
   // Act
-  int result = calculator.subtract(firstValue, secondValue);
+  int result = calculator.subtract(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedDifference));
+  EXPECT_THAT(result, Eq(expected_difference));
 }
 
 TEST_F(CalculatorTest, Subtract_ResultingInNegative_ReturnsCorrectDifference) {
   // Arrange
-  int firstValue = 10;
-  int secondValue = 15;
-  int expectedDifference = -5;
+  int first_value = 10;
+  int second_value = 15;
+  int expected_difference = -5;
 
   // Act
-  int result = calculator.subtract(firstValue, secondValue);
+  int result = calculator.subtract(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedDifference));
+  EXPECT_THAT(result, Eq(expected_difference));
 }
 
 TEST_F(CalculatorTest, Multiply_PositiveNumbers_ReturnsCorrectProduct) {
   // Arrange
-  int firstValue = 3;
-  int secondValue = 4;
-  int expectedProduct = 12;
+  int first_value = 3;
+  int second_value = 4;
+  int expected_product = 12;
 
   // Act
-  int result = calculator.multiply(firstValue, secondValue);
+  int result = calculator.multiply(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedProduct));
+  EXPECT_THAT(result, Eq(expected_product));
 }
 
 TEST_F(CalculatorTest, Multiply_NegativeAndPositive_ReturnsCorrectProduct) {
   // Arrange
-  int firstValue = -2;
-  int secondValue = 5;
-  int expectedProduct = -10;
+  int first_value = -2;
+  int second_value = 5;
+  int expected_product = -10;
 
   // Act
-  int result = calculator.multiply(firstValue, secondValue);
+  int result = calculator.multiply(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedProduct));
+  EXPECT_THAT(result, Eq(expected_product));
 }
 
 TEST_F(CalculatorTest, Multiply_WithZero_ReturnsZero) {
   // Arrange
-  int firstValue = 0;
-  int secondValue = 100;
-  int expectedProduct = 0;
+  int first_value = 0;
+  int second_value = 100;
+  int expected_product = 0;
 
   // Act
-  int result = calculator.multiply(firstValue, secondValue);
+  int result = calculator.multiply(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedProduct));
+  EXPECT_THAT(result, Eq(expected_product));
 }
 
 TEST_F(CalculatorTest, Divide_EvenDivision_ReturnsCorrectQuotient) {
   // Arrange
-  int firstValue = 10;
-  int secondValue = 2;
-  double expectedQuotient = 5.0;
+  int first_value = 10;
+  int second_value = 2;
+  double expected_quotient = 5.0;
 
   // Act
-  double result = calculator.divide(firstValue, secondValue);
+  double result = calculator.divide(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, DoubleEq(expectedQuotient));
+  EXPECT_THAT(result, DoubleEq(expected_quotient));
 }
 
 TEST_F(CalculatorTest, Divide_WithRemainder_ReturnsCorrectQuotient) {
   // Arrange
-  int firstValue = 7;
-  int secondValue = 2;
-  double expectedQuotient = 3.5;
+  int first_value = 7;
+  int second_value = 2;
+  double expected_quotient = 3.5;
 
   // Act
-  double result = calculator.divide(firstValue, secondValue);
+  double result = calculator.divide(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, DoubleEq(expectedQuotient));
+  EXPECT_THAT(result, DoubleEq(expected_quotient));
 }
 
 TEST_F(CalculatorTest, Divide_NegativeNumber_ReturnsCorrectQuotient) {
   // Arrange
-  int firstValue = -10;
-  int secondValue = 2;
-  double expectedQuotient = -5.0;
+  int first_value = -10;
+  int second_value = 2;
+  double expected_quotient = -5.0;
 
   // Act
-  double result = calculator.divide(firstValue, secondValue);
+  double result = calculator.divide(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, DoubleEq(expectedQuotient));
+  EXPECT_THAT(result, DoubleEq(expected_quotient));
 }
 
 TEST_F(CalculatorTest, Divide_ByZero_ThrowsInvalidArgumentException) {
   // Arrange
-  int firstValue = 10;
-  int secondValue = 0;
+  int first_value = 10;
+  int second_value = 0;
 
   // Act & Assert
-  EXPECT_THROW(calculator.divide(firstValue, secondValue),
+  EXPECT_THROW(calculator.divide(first_value, second_value),
                std::invalid_argument);
 }
 
 class MockCalculator {
 public:
-  MOCK_METHOD(int, add, (int firstValue, int secondValue));
-  MOCK_METHOD(int, subtract, (int firstValue, int secondValue));
+  MOCK_METHOD(int, add, (int first_value, int second_value));
+  MOCK_METHOD(int, subtract, (int first_value, int second_value));
 };
 
 TEST(MockCalculatorTest, Add_WithMock_ReturnsExpectedValue) {
   // Arrange
-  MockCalculator mockCalculator;
-  int firstValue = 2;
-  int secondValue = 3;
-  int expectedResult = 5;
+  MockCalculator mock_calculator;
+  int first_value = 2;
+  int second_value = 3;
+  int expected_result = 5;
 
-  EXPECT_CALL(mockCalculator, add(firstValue, secondValue))
-      .WillOnce(::testing::Return(expectedResult));
+  EXPECT_CALL(mock_calculator, add(first_value, second_value))
+      .WillOnce(::testing::Return(expected_result));
 
   // Act
-  int result = mockCalculator.add(firstValue, secondValue);
+  int result = mock_calculator.add(first_value, second_value);
 
   // Assert
-  EXPECT_THAT(result, Eq(expectedResult));
+  EXPECT_THAT(result, Eq(expected_result));
 }

@@ -1,14 +1,14 @@
 # C++ Naming Conventions
 
-This document provides mandatory naming standards for Claude Code when working with this C++ project.
+This document provides mandatory naming standards for this C++ project.
 
-## Quick Reference
+## Quick Reference (OVERVIEW)
 
 ### Most Common Patterns
 - **Classes**: `PascalCase` → `Calculator`, `DataProcessor`
-- **Variables**: `camelCase` → `counter`, `fileName`
-- **Functions**: `camelCase` → `processData()`, `getName()`
-- **Members**: `m_camelCase` → `m_result`, `m_isValid`
+- **Variables**: `snake_case` → `counter`, `file_name`
+- **Functions**: `snake_case` → `process_data()`, `get_name()`
+- **Members**: `m_snake_case` → `m_result`, `m_is_valid`
 - **Files**: `snake_case` → `calculator.h`, `data_processor.cpp`
 - **Macros**: `UPPERCASE` → `MAX_BUFFER_SIZE`
 
@@ -18,27 +18,26 @@ This document provides mandatory naming standards for Claude Code when working w
 - **Tests**: `class_name.test.cpp`
 - **Benchmarks**: `class_name.benchmark.cpp`
 
-## Complete Conventions Table
+## Complete Conventions Table (REFERENCE)
 
 | Element | Convention | Example | Notes |
 |---------|------------|---------|-------|
 | **Classes** | PascalCase | `DataProcessor`, `HTTPClient` | Main types |
-| **Variables** | camelCase | `counter`, `fileName`, `maxRetries` | Local & parameters |
-| **Class Members** | `m_camelCase` | `m_result`, `m_isValid` | **MANDATORY m_ prefix** |
-| **Static Members** | `s_camelCase` | `s_instanceCount`, `s_maxSize` | **MANDATORY s_ prefix** |
-| **Global Variables** | `g_camelCase` | `g_applicationState`, `g_isDebugMode` | **MANDATORY g_ prefix** |
-| **Functions** | camelCase | `processData()`, `getName()` | Methods & functions |
-| **Function Parameters** | camelCase | `inputFile`, `maxRetries`, `enableLogging` | No prefixes |
-| **Lambda Variables** | camelCase | `processItem`, `filterData` | Capture variables |
+| **Variables** | snake_case | `counter`, `file_name`, `max_retries` | Local & parameters |
+| **Class Members** | `m_` + snake_case | `m_result`, `m_is_valid` | **MANDATORY m_ prefix** |
+| **Static Members** | `s_` + snake_case | `s_instance_count`, `s_max_size` | **MANDATORY s_ prefix** |
+| **Global Variables** | `g_` + snake_case | `g_application_state`, `g_is_debug_mode` | **MANDATORY g_ prefix** |
+| **Functions** | snake_case | `process_data()`, `get_name()` | Methods & functions |
+| **Function Parameters** | snake_case | `input_file`, `max_retries`, `enable_logging` | No prefixes |
+| **Lambda Variables** | snake_case | `process_item`, `filter_data` | Capture variables |
 | **Structs** | PascalCase | `Point`, `Configuration` | Like classes |
-| **Struct Members** | camelCase | `connectionString`, `port` | **NO prefixes** |
-| **Unions** | PascalCase | `DataValue`, `MessageContent` | Like classes |
+| **Struct Members** | snake_case | `connection_string`, `port` | **NO prefixes** |
 | **Namespaces** | PascalCase | `DataProcessing`, `Networking` | Module names |
-| **Enums** | PascalCase | `enum class Colour { Red, Green }` | Use enum class |
+| **Enums** | PascalCase | `enum class Colour { red, green }` | Use enum class |
 | **Templates** | PascalCase | `template<typename T, int Size>` | Type parameters |
-| **Type Aliases** | PascalCase | `using StringList = std::vector<std::string>` | Custom types |
-| **Exception Classes** | PascalCase + Exception | `FileNotFoundException`, `InvalidArgumentException` | **MANDATORY suffix** |
-| **Interface Classes** | I + PascalCase | `IDrawable`, `ISerializable` | **MANDATORY I prefix** |
+| **Type Aliases** | PascalCase + `_t` | `using StringList_t = std::vector<std::string>` | **MANDATORY _t suffix** |
+| **Exception Classes** | PascalCase + `Exception` | `FileNotFoundException`, `InvalidArgumentException` | **MANDATORY suffix** |
+| **Interface Classes** | `I` + PascalCase | `IDrawable`, `ISerializable` | **MANDATORY I prefix** |
 | **Concepts (C++20)** | PascalCase | `Drawable`, `Serializable` | No I prefix |
 | **Macros** | UPPERCASE | `MAX_BUFFER_SIZE`, `DEBUG_PRINT` | Use sparingly |
 | **Files (Headers)** | snake_case.h | `data_processor.h`, `http_client.h` | **Class → file conversion** |
@@ -47,9 +46,9 @@ This document provides mandatory naming standards for Claude Code when working w
 | **Benchmark Files** | snake_case.benchmark.cpp | `network_manager.benchmark.cpp` | **MANDATORY .benchmark.cpp** |
 | **Directories** | snake_case | `data_processing/`, `network_utils/` | Lowercase |
 
-## Critical Naming Rules
+## Critical Naming Rules (MANDATORY)
 
-### Member Variable Prefixes (MANDATORY)
+### Member Variable Prefixes (CRITICAL)
 ```cpp
 class Calculator {
 private:
@@ -57,10 +56,10 @@ private:
     static int s_count; // REQUIRED s_ prefix
 };
 
-int g_globalCounter;    // REQUIRED g_ prefix
+int g_global_counter;    // REQUIRED g_ prefix with snake_case
 ```
 
-### File Naming Conversion (MANDATORY)
+### File Naming Conversion (CRITICAL)
 **Rule**: PascalCase class → snake_case file
 ```cpp
 // Class: HTTPClient → File: http_client.h/cpp
@@ -68,7 +67,7 @@ int g_globalCounter;    // REQUIRED g_ prefix
 // Class: XMLParser → File: xml_parser.h/cpp
 ```
 
-### Exception and Interface Naming (MANDATORY)
+### Exception and Interface Naming (CRITICAL)
 ```cpp
 // Exceptions MUST end with "Exception"
 class FileNotFoundException : public std::exception {};
@@ -81,7 +80,7 @@ public:
 };
 ```
 
-## Key Principles (MANDATORY)
+## Key Principles (GUIDELINES)
 
 - **Consistency**: Use the same convention throughout the entire project
 - **No Hungarian notation**: Avoid encoding type information in names (no `strName`, `nCount`)
@@ -89,7 +88,7 @@ public:
 - **Readable identifiers**: Names should be self-documenting
 - **Prefix adherence**: Always use required prefixes (m_, s_, g_, I)
 
-## Common Mistakes to Avoid
+## Common Mistakes to Avoid (EXAMPLES)
 
 ```cpp
 // BAD - Missing prefixes
@@ -99,7 +98,7 @@ class Calculator {
 };
 
 // BAD - Wrong case
-void ProcessData();     // Should be processData()
+void ProcessData();     // Should be process_data()
 class dataProcessor;    // Should be DataProcessor
 
 // BAD - Hungarian notation
@@ -110,43 +109,32 @@ std::string strName;    // Should be name
 class DataProcessor {
 private:
     int m_value;
-    static int s_instanceCount;
+    static int s_instance_count;
 public:
-    void processData();
+    void process_data();
 };
 ```
 
-## File Organization Examples
+## Quick Lookup by Type (REFERENCE)
 
-```
-src/
-├── calculator.h              // Calculator class
-├── calculator.cpp            // Calculator implementation
-├── data_processor.h          // DataProcessor class
-├── data_processor.cpp        // DataProcessor implementation
-tests/
-├── calculator.test.cpp       // Calculator tests
-├── data_processor.test.cpp   // DataProcessor tests
-benchmarks/
-├── calculator.benchmark.cpp  // Calculator benchmarks
-```
+### Variables (QUICK REFERENCE)
+- Local: `snake_case`
+- Member: `m_snake_case`
+- Static: `s_snake_case`
+- Global: `g_snake_case`
 
-## Quick Lookup by Type
-
-### Variables
-- Local: `camelCase`
-- Member: `m_camelCase`
-- Static: `s_camelCase`
-- Global: `g_camelCase`
-
-### Types
+### Types (QUICK REFERENCE)
 - Class/Struct/Union: `PascalCase`
 - Interface: `IPascalCase`
 - Exception: `PascalCaseException`
 - Enum: `PascalCase`
 
-### Files
+### Files (QUICK REFERENCE)
 - Header: `snake_case.h`
 - Source: `snake_case.cpp`
 - Test: `snake_case.test.cpp`
 - Benchmark: `snake_case.benchmark.cpp`
+
+---
+
+Following these naming conventions ensures code consistency, maintainability, and readability across the entire project.
