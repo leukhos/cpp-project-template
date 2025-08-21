@@ -2,25 +2,18 @@
 
 A modern C++ project template with CMake build system, vcpkg dependency management, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
 
-## Modification to apply to the README
-- vcpkg is just an option provided to handled dependencies. The CMake project does not depends on vcpkg to manage the dependencies. This is only an option provided via CMake presets. The dependencies are loaded via CMake using FindPackage function, but no dependencies to vcpkg are included in the CMakeLists files. This is important to distinguish this. The project is not dependent on vcpkg, once again, I just provide a solution to handle the dependencies, but everyone can use the one he prefer. Same remarks for using the vcpkg features and manifest mode. The preset are using this, but these are only preset, and so no one is obliged to use it. Maybe a section can be required here on how to use the preset (take example on the ci.yml github action commands), specifying that this is not an obligation
-- In Features, rework the vcpkg entry, to explicit the fact that this is independent from the CMake project, just in preset. Mentioned the manifest mode
-- In Feature, mentioned that the devcontainer is based on microsoft one (nothing extraodinary here)
-- Rework the Dependencies section to remove the mention of vcpkg to focus on the real dependencies
-- Remove any CLAUDE.md reference
-- Remove the "Usage as a template" section, as it seems not relevant. 
 
 ## Features
 
 - **CMake Build System**: Modern CMake (3.25+) with FILE_SET support and target-based configuration
-- **vcpkg Integration**: Automatic dependency management with CMake presets
+- **Optional vcpkg Integration**: CMake presets provide optional vcpkg dependency management with manifest mode - the project is fully independent of vcpkg
 - **Testing**: GoogleTest and GoogleMock integration with automatic test discovery
 - **Benchmarking**: Google Benchmark for performance testing
 - **Modern C++**: C++20 standard with comprehensive compiler warnings
 - **Multi-Compiler Support**: CMake presets for GCC, Clang, and MSVC
 - **Continuous Integration**: GitHub Actions CI testing across Ubuntu, macOS, and Windows with intelligent caching
 - **Code Standards**: Comprehensive coding guidelines and naming conventions
-- **Development Container**: Ready-to-use devcontainer configuration
+- **Development Container**: Ready-to-use devcontainer configuration based on Microsoft's official containers
 
 ## Project Structure
 
@@ -30,7 +23,6 @@ cpp-project-template/
 ├── CMakePresets.json           # CMake presets for different compilers
 ├── vcpkg.json                  # vcpkg dependencies manifest
 ├── vcpkg-configuration.json    # vcpkg configuration
-├── CLAUDE.md                   # Claude Code guidance document
 ├── src/                        # Source files and headers
 │   ├── CMakeLists.txt          # Library target configuration
 │   ├── calculator.cpp          # Example implementation
@@ -57,41 +49,66 @@ cpp-project-template/
 
 ## Dependencies
 
-Dependencies are managed through vcpkg with feature-based configuration:
+The project has minimal runtime dependencies:
 
-- **GoogleTest/GoogleMock**: Testing and mocking framework (vcpkg feature: `tests`)
-- **Google Benchmark**: Performance benchmarking (vcpkg feature: `benchmarks`)
+- **GoogleTest/GoogleMock**: Testing and mocking framework (enabled with `CALCULATOR_BUILD_TESTS=ON`)
+- **Google Benchmark**: Performance benchmarking (enabled with `CALCULATOR_BUILD_BENCHMARKS=ON`)
 
-See `vcpkg.json` for the complete dependency configuration.
+Dependencies are loaded via CMake's `find_package()` function. The project includes optional vcpkg integration through CMake presets, but this is not required - you can use any dependency management approach you prefer.
 
 ## Code Guidelines
 
-This project follows strict coding standards:
+This project follows strict coding standards documented in the `docs/` directory:
 
-- **Naming Conventions**: See [docs/naming_conventions.md](docs/naming_conventions.md)
-- **Code Formatting**: See [docs/code_guidelines.md](docs/code_guidelines.md)
-- **Header Organization**: Specific order and grouping requirements
-- **Test Naming**: `MethodName_Scenario_ExpectedBehavior` format
-- **Benchmark Naming**: `BM_DescriptiveName` format
+- **Naming Conventions**: See [docs/naming_conventions.md](docs/naming_conventions.md) for complete naming rules
+- **Code Formatting**: See [docs/code_guidelines.md](docs/code_guidelines.md) for formatting and structure guidelines
+- **Header Organization**: Critical header inclusion order with mandatory grouping and comments
+- **Test Standards**: AAA pattern with `EXPECT_THAT` matchers, `MethodName_Scenario_ExpectedBehavior` naming
+- **Benchmark Standards**: `BM_Component_Operation_Scenario_Parameters` naming convention
+
+### Key Standards Summary
+
+- **Classes**: `PascalCase` (Calculator, DataProcessor)
+- **Variables**: `snake_case` (counter, file_name)
+- **Members**: `m_snake_case` (m_result, m_is_valid) 
+- **Functions**: `snake_case` (process_data, get_name)
+- **Files**: `snake_case.{h,cpp}` (calculator.h, data_processor.cpp)
 
 ### Code Formatting
 
-The project uses clang-format with LLVM style:
+The project uses clang-format with LLVM style (2-space indentation, 80 character line length):
 
 ```bash
-clang-format -i src/**/*.{cpp,h} tests/**/*.cpp benchmarks/**/*.cpp
+clang-format -i src/**/*.{cpp,h} tests/**/*.{cpp,h} benchmarks/**/*.cpp
 ```
 
-## Usage as Template
+## Using CMake Presets
 
-1. Clone or download this repository
-2. Replace the example calculator code with your own implementation
-3. Update the project name in `CMakeLists.txt`
-4. Modify the library name and source files in `src/CMakeLists.txt`
-5. Update `vcpkg.json` with your specific dependencies
-6. Update tests and benchmarks following the naming conventions
-7. Follow the coding guidelines in `docs/` directory
-8. See `CLAUDE.md` for detailed development guidance
+The project includes CMake presets for different compilers with optional vcpkg integration. All presets share common settings and enable tests by default:
+
+**Common Settings (applied to all presets):**
+- Debug configuration (`CMAKE_BUILD_TYPE=Debug`)
+- Unit tests enabled (`CALCULATOR_BUILD_TESTS=ON`)
+- vcpkg toolchain integration (when `VCPKG_ROOT` is set)
+- Output directory: `build/`
+
+**Available Presets:**
+
+- **gcc**: GCC compiler with comprehensive warnings (`-Wall -Wextra -Wpedantic`)
+- **clang**: Clang compiler with comprehensive warnings (`-Wall -Wextra -Wpedantic`)  
+- **msvc**: MSVC compiler with high warning level (`/W4 /permissive- /EHsc`) - Windows only
+
+```bash
+# Configure with any preset
+cmake --preset gcc
+cmake --preset clang
+cmake --preset msvc  # Windows only
+
+# Build the configured project
+cmake --build build
+```
+
+See `CMakePresets.json` for complete preset configuration details.
 
 ## License
 
