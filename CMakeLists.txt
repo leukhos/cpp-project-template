@@ -11,5 +11,5 @@ endif()
 
 option(CALCULATOR_BUILD_BENCHMARKS "Build benchmark executables" OFF)
 if(CALCULATOR_BUILD_BENCHMARKS)
-    add_subdirectory(benchmarks)
+    add_subdirectory(benches)
 endif()

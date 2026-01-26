@@ -4,44 +4,44 @@
 // Third-party headers
 #include <benchmark/benchmark.h>
 
-static void BM_Calculator_Add_Basic(benchmark::State& state) {
+static void benchmark_calculator_add_basic(benchmark::State& state) {
   Calculator calculator;
   for (auto _ : state) {
     benchmark::DoNotOptimize(calculator.add(42, 17));
   }
 }
-BENCHMARK(BM_Calculator_Add_Basic);
+BENCHMARK(benchmark_calculator_add_basic);
 
-static void BM_Calculator_Subtract_Basic(benchmark::State& state) {
+static void benchmark_calculator_subtract_basic(benchmark::State& state) {
   Calculator calculator;
   for (auto _ : state) {
     benchmark::DoNotOptimize(calculator.subtract(42, 17));
   }
 }
-BENCHMARK(BM_Calculator_Subtract_Basic);
+BENCHMARK(benchmark_calculator_subtract_basic);
 
-static void BM_Calculator_Multiply_Basic(benchmark::State& state) {
+static void benchmark_calculator_multiply_basic(benchmark::State& state) {
   Calculator calculator;
   for (auto _ : state) {
     benchmark::DoNotOptimize(calculator.multiply(42, 17));
   }
 }
-BENCHMARK(BM_Calculator_Multiply_Basic);
+BENCHMARK(benchmark_calculator_multiply_basic);
 
-static void BM_Calculator_Divide_Basic(benchmark::State& state) {
+static void benchmark_calculator_divide_basic(benchmark::State& state) {
   Calculator calculator;
   for (auto _ : state) {
     benchmark::DoNotOptimize(calculator.divide(42, 17));
   }
 }
-BENCHMARK(BM_Calculator_Divide_Basic);
+BENCHMARK(benchmark_calculator_divide_basic);
 
-static void BM_Calculator_Add_Range(benchmark::State& state) {
+static void benchmark_calculator_add_range(benchmark::State& state) {
   Calculator calculator;
   for (auto _ : state) {
     benchmark::DoNotOptimize(calculator.add(state.range(0), state.range(1)));
   }
 }
-BENCHMARK(BM_Calculator_Add_Range)->Args({8, 32})->Args({64, 128})->Args({512, 1024});
+BENCHMARK(benchmark_calculator_add_range)->Args({8, 32})->Args({64, 128})->Args({512, 1024});
 
 BENCHMARK_MAIN();

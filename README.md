@@ -1,18 +1,19 @@
-# C++ Project Template
+# C++ Project Template (Rust-Inspired)
 
-A modern C++ project template with CMake build system, vcpkg dependency management, GoogleTest/GoogleMock testing framework, and Google Benchmark performance testing.
+A modern C++ project template following Rust language conventions, with CMake build system, vcpkg dependency management, DocTest testing framework, and Google Benchmark performance testing.
 
 
 ## Features
 
+- **Rust-Inspired Conventions**: Follows Rust naming and project structure patterns in C++
 - **CMake Build System**: Modern CMake (3.25+) with FILE_SET support and target-based configuration
 - **Optional vcpkg Integration**: CMake presets provide optional vcpkg dependency management with manifest mode - the project is fully independent of vcpkg
-- **Testing**: GoogleTest and GoogleMock integration with automatic test discovery
-- **Benchmarking**: Google Benchmark for performance testing
+- **Testing**: DocTest framework with Rust-style test organization
+- **Benchmarking**: Google Benchmark in `benches/` directory (Rust convention)
 - **Modern C++**: C++20 standard with comprehensive compiler warnings
 - **Multi-Compiler Support**: CMake presets for GCC, Clang, and MSVC
 - **Continuous Integration**: GitHub Actions CI testing across Ubuntu, macOS, and Windows with intelligent caching
-- **Code Standards**: Comprehensive coding guidelines and naming conventions
+- **Code Standards**: Rust-inspired coding guidelines and naming conventions
 - **Development Container**: Ready-to-use devcontainer configuration based on Microsoft's official containers
 
 ## Project Structure
@@ -25,21 +26,20 @@ cpp-project-template/
 ├── vcpkg-configuration.json    # vcpkg configuration
 ├── src/                        # Source files and headers
 │   ├── CMakeLists.txt          # Library target configuration
-│   ├── calculator.cpp          # Example implementation
+│   ├── calculator.cpp          # Implementation + unit tests (Rust-style)
 │   ├── include/calculator/     # Public headers (FILE_SET)
 │   │   └── calculator.h        # Example header
 │   └── cmake/                  # CMake package configuration
 │       └── calculatorConfig.cmake
-├── tests/                      # Unit tests
+├── tests/                      # Functional/Integration tests (Rust-style)
 │   ├── CMakeLists.txt          # Test executable configuration
-│   ├── main.cpp               # Test runner main
-│   └── calculator.test.cpp    # Example GoogleTest/GoogleMock tests
-├── benchmarks/                 # Performance benchmarks
+│   └── calculator.test.cpp    # Functional tests for public API
+├── benches/                    # Performance benchmarks (Rust convention)
 │   ├── CMakeLists.txt          # Benchmark executable configuration
-│   └── calculator.benchmark.cpp # Example Google Benchmark tests
+│   └── calculator.benchmark.cpp # snake_case benchmark functions
 └── docs/                       # Documentation
-    ├── code_guidelines.md      # Coding standards and formatting rules
-    └── naming_conventions.md   # Naming convention guidelines
+    ├── code_guidelines.md      # Rust-inspired coding standards
+    └── naming_conventions.md   # Rust-inspired naming conventions
 ```
 
 ## CMake Options
@@ -51,27 +51,35 @@ cpp-project-template/
 
 The project has minimal runtime dependencies:
 
-- **GoogleTest/GoogleMock**: Testing and mocking framework (enabled with `CALCULATOR_BUILD_TESTS=ON`)
+- **DocTest**: Lightweight, header-only testing framework (enabled with `CALCULATOR_BUILD_TESTS=ON`)
+- **Trompeloeil**: Modern C++ mocking framework (enabled with `CALCULATOR_BUILD_TESTS=ON`)
 - **Google Benchmark**: Performance benchmarking (enabled with `CALCULATOR_BUILD_BENCHMARKS=ON`)
 
 Dependencies are loaded via CMake's `find_package()` function. The project includes optional vcpkg integration through CMake presets, but this is not required - you can use any dependency management approach you prefer.
 
-## Code Guidelines
+## Code Guidelines (Rust-Inspired)
 
-This project follows strict coding standards documented in the `docs/` directory:
+This project follows Rust-inspired coding standards documented in the `docs/` directory:
 
-- **Naming Conventions**: See [docs/naming_conventions.md](docs/naming_conventions.md) for complete naming rules
+- **Naming Conventions**: See [docs/naming_conventions.md](docs/naming_conventions.md) for Rust-style naming rules
 - **Code Formatting**: See [docs/code_guidelines.md](docs/code_guidelines.md) for formatting and structure guidelines
 - **Header Organization**: Critical header inclusion order with mandatory grouping and comments
-- **Test Standards**: AAA pattern with `EXPECT_THAT` matchers, `MethodName_Scenario_ExpectedBehavior` naming
-- **Benchmark Standards**: `BM_Component_Operation_Scenario_Parameters` naming convention
+- **Test Organization**:
+  - **Unit tests**: Embedded in source files (`src/*.cpp`) - test implementation details
+  - **Functional tests**: In `tests/` directory - test public API and workflows
+- **Test Standards**: AAA pattern with DocTest, `TEST_CASE("Module - scenario")` naming
+- **Benchmark Standards**: `benchmark_component_operation_scenario` snake_case naming
 
-### Key Standards Summary
+### Key Standards Summary (Rust-Inspired)
 
-- **Classes**: `PascalCase` (Calculator, DataProcessor)
+- **Classes/Structs**: `PascalCase` (Calculator, DataProcessor)
 - **Variables**: `snake_case` (counter, file_name)
-- **Members**: `m_snake_case` (m_result, m_is_valid) 
+- **Members**: `snake_case` - NO prefixes (result, is_valid)
 - **Functions**: `snake_case` (process_data, get_name)
+- **Constants**: `SCREAMING_SNAKE_CASE` (MAX_BUFFER_SIZE)
+- **Namespaces**: `snake_case` (data_processing, networking)
+- **Error Types**: `PascalCaseError` (FileNotFoundError, ParseError)
+- **Traits**: `PascalCase` - NO "I" prefix (Drawable, Serializable)
 - **Files**: `snake_case.{h,cpp}` (calculator.h, data_processor.cpp)
 
 ### Code Formatting
@@ -79,7 +87,7 @@ This project follows strict coding standards documented in the `docs/` directory
 The project uses clang-format with LLVM style (2-space indentation, 80 character line length):
 
 ```bash
-clang-format -i src/**/*.{cpp,h} tests/**/*.{cpp,h} benchmarks/**/*.cpp
+clang-format -i src/**/*.{cpp,h} tests/**/*.{cpp,h} benches/**/*.cpp
 ```
 
 ## Using CMake Presets

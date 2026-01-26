@@ -1,3 +1,5 @@
+find_package(doctest REQUIRED)
+
 add_library(calculator)
 add_library(calculator::calculator ALIAS calculator)
 
@@ -13,6 +15,13 @@ target_sources(calculator
 )
 
 target_compile_features(calculator PUBLIC cxx_std_20)
+
+# Link DocTest (required for unit tests in source files)
+target_link_libraries(calculator PRIVATE doctest::doctest)
+
+# Disable DocTest compilation in production/library builds
+# Tests are only compiled when building the test executable
+target_compile_definitions(calculator PRIVATE DOCTEST_CONFIG_DISABLE)
 
 install(
     TARGETS calculator

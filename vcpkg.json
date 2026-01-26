@@ -10,7 +10,8 @@
     "tests": {
       "description": "Build tests",
       "dependencies": [
-        "gtest"
+        "doctest",
+        "trompeloeil"
       ]
     }
   }
