@@ -2,10 +2,65 @@
     "version": 6,
     "configurePresets": [
         {
-            "name": "default",
+            "name": "base",
             "hidden": true,
+            "generator": "Ninja",
             "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-            "binaryDir": "${sourceDir}/build",
+            "binaryDir": "${sourceDir}/build"
+        },
+        {
+            "name": "platform",
+            "hidden": true,
+            "inherits": "base",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
+            "cacheVariables": {
+                "CMAKE_C_platform": "gcc",
+                "CMAKE_CXX_platform": "g++",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
+                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
+            }
+        },
+        {
+            "name": "platform",
+            "hidden": true,
+            "inherits": "base",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            },
+            "cacheVariables": {
+                "CMAKE_C_platform": "clang",
+                "CMAKE_CXX_platform": "clang++",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
+                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
+            }
+        },
+        {
+            "name": "platform",
+            "hidden": true,
+            "inherits": "base",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "cacheVariables": {
+                "CMAKE_C_platform": "cl",
+                "CMAKE_CXX_platform": "cl",
+                "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc",
+                "CMAKE_C_FLAGS": "/W4 /permissive-"
+            }
+        },
+        {
+            "name": "dev",
+            "inherits": "platform",
+            "displayName": "Development (Debug)",
+            "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CALCULATOR_BUILD_TESTS": "ON",
@@ -13,24 +68,21 @@
             }
         },
         {
-            "name": "dev",
-            "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
             "name": "test",
-            "description": "All tests (unit and functional). To be used on CI. On CI, need to run dev and test preset",
-            "inherits": "default",
+            "inherits": "platform",
+            "displayName": "Test (RelWithDebInfo)",
+            "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CALCULATOR_BUILD_TESTS": "ON",
                 "VCPKG_MANIFEST_FEATURES": "tests"
             }
         },
         {
-            "name": "release",
-            "inherits": "default",
+            "name": "prod",
+            "inherits": "platform",
+            "displayName": "Production (Release)",
+            "description": "Production release build with full optimizations and tests compiled out.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "DOCTEST_CONFIG_DISABLE": "ON"
@@ -38,50 +90,11 @@
         },
         {
             "name": "bench",
-            "inherits": "release",
+            "inherits": "prod",
+            "displayName": "Benchmark (Release)",
+            "description": "Benchmarking profile with release optimizations and performance tests enabled.",
             "cacheVariables": {
                 "VCPKG_MANIFEST_FEATURES": "bench"
-            }
-        },
-        {
-            "name": "gcc",
-            "displayName": "GCC",
-            "description": "Build configuration using GCC compiler and vcpkg toolchain",
-            "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
-            }
-        },
-        {
-            "name": "clang",
-            "displayName": "Clang",
-            "description": "Build configuration using Clang compiler and vcpkg toolchain",
-            "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
-            }
-        },
-        {
-            "name": "msvc",
-            "displayName": "MSVC",
-            "description": "Build configuration using MSVC compiler and vcpkg toolchain",
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            },
-            "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl",
-                "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc",
-                "CMAKE_C_FLAGS": "/W4 /permissive-"
             }
         }
     ]
