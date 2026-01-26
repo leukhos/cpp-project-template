@@ -13,6 +13,37 @@
             }
         },
         {
+            "name": "dev",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "test",
+            "description": "All tests (unit and functional). To be used on CI. On CI, need to run dev and test preset",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "VCPKG_MANIFEST_FEATURES": "tests"
+            }
+        },
+        {
+            "name": "release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "DOCTEST_CONFIG_DISABLE": "ON"
+            }
+        },
+        {
+            "name": "bench",
+            "inherits": "release",
+            "cacheVariables": {
+                "VCPKG_MANIFEST_FEATURES": "bench"
+            }
+        },
+        {
             "name": "gcc",
             "displayName": "GCC",
             "description": "Build configuration using GCC compiler and vcpkg toolchain",
