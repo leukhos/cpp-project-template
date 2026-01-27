@@ -7,9 +7,9 @@ target_sources(calculator
     PUBLIC
         FILE_SET calculator_headers
         TYPE HEADERS
-        BASE_DIRS include
+        BASE_DIRS ${CMAKE_SOURCE_DIR}/include
         FILES
-            include/calculator/calculator.h
+            ${CMAKE_SOURCE_DIR}/include/calculator/calculator.h
     PRIVATE
         calculator.cpp
 )
@@ -37,7 +37,7 @@ install(
 
 install(
     FILES
-        ./cmake/calculatorConfig.cmake
-    DESTINATION 
+        ${CMAKE_SOURCE_DIR}/cmake/calculatorConfig.cmake
+    DESTINATION
         share/cmake/calculator
 )

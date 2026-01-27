@@ -24,13 +24,13 @@ cpp-project-template/
 ├── CMakePresets.json           # CMake presets for different compilers
 ├── vcpkg.json                  # vcpkg dependencies manifest
 ├── vcpkg-configuration.json    # vcpkg configuration
-├── src/                        # Source files and headers
+├── include/calculator/         # Public headers (FILE_SET)
+│   └── calculator.h            # Example header
+├── cmake/                      # CMake package configuration
+│   └── calculatorConfig.cmake
+├── src/                        # Source files
 │   ├── CMakeLists.txt          # Library target configuration
-│   ├── calculator.cpp          # Implementation + unit tests (Rust-style)
-│   ├── include/calculator/     # Public headers (FILE_SET)
-│   │   └── calculator.h        # Example header
-│   └── cmake/                  # CMake package configuration
-│       └── calculatorConfig.cmake
+│   └── calculator.cpp          # Implementation + unit tests (Rust-style)
 ├── tests/                      # Functional/Integration tests (Rust-style)
 │   ├── CMakeLists.txt          # Test executable configuration
 │   └── calculator.test.cpp    # Functional tests for public API

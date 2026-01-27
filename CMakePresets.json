@@ -18,8 +18,8 @@
                 "rhs": "Linux"
             },
             "cacheVariables": {
-                "CMAKE_C_platform": "gcc",
-                "CMAKE_CXX_platform": "g++",
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++",
                 "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
                 "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
             }
@@ -34,10 +34,10 @@
                 "rhs": "Darwin"
             },
             "cacheVariables": {
-                "CMAKE_C_platform": "clang",
-                "CMAKE_CXX_platform": "clang++",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic"
             }
         },
         {
@@ -50,10 +50,10 @@
                 "rhs": "Windows"
             },
             "cacheVariables": {
-                "CMAKE_C_platform": "cl",
+                "CMAKE_C_COMPILER": "cl",
                 "CMAKE_CXX_platform": "cl",
-                "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc",
-                "CMAKE_C_FLAGS": "/W4 /permissive-"
+                "CMAKE_C_FLAGS": "/W4 /permissive-",
+                "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc"
             }
         },
         {

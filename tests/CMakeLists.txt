@@ -26,7 +26,7 @@ target_link_libraries(calculator_tests
 # Include calculator headers for unit tests in source
 target_include_directories(calculator_tests
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/src/include
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 include(doctest)

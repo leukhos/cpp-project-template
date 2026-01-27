@@ -5,17 +5,17 @@ This TODO list tracks the ongoing refactoring to align the C++ project with Rust
 ## 1. Project Structure Reorganization
 
 ### 1.1 Move directories to root (align with common practice)
-- [ ] Move `src/include/` to `include/` at project root
-  - [ ] Update all `#include` paths in source files if needed
-  - [ ] Update `src/CMakeLists.txt` `BASE_DIRS` from `include` to `${CMAKE_SOURCE_DIR}/include`
-  - [ ] Update install commands in `src/CMakeLists.txt`
-  - [ ] Verify FILE_SET still works correctly
-- [ ] Move `src/cmake/` to `cmake/` at project root
-  - [ ] Update `install(FILES ./cmake/calculatorConfig.cmake ...)` path in `src/CMakeLists.txt`
-  - [ ] Update any references to cmake module path
-  - [ ] Test that package configuration still works for consumers
-- [ ] Update project structure diagram in [README.md](README.md) to reflect new layout
-- [ ] Test build and install workflow after restructuring
+- [x] Move `src/include/` to `include/` at project root
+  - [x] Update all `#include` paths in source files if needed
+  - [x] Update `src/CMakeLists.txt` `BASE_DIRS` from `include` to `${CMAKE_SOURCE_DIR}/include`
+  - [x] Update install commands in `src/CMakeLists.txt`
+  - [x] Verify FILE_SET still works correctly
+- [x] Move `src/cmake/` to `cmake/` at project root
+  - [x] Update `install(FILES ./cmake/calculatorConfig.cmake ...)` path in `src/CMakeLists.txt`
+  - [x] Update any references to cmake module path
+  - [x] Test that package configuration still works for consumers
+- [x] Update project structure diagram in [README.md](README.md) to reflect new layout
+- [x] Test build and install workflow after restructuring
 
 ## 2. CMakePresets Refactoring
 
