@@ -9,7 +9,7 @@
             "binaryDir": "${sourceDir}/build"
         },
         {
-            "name": "platform",
+            "name": "platform-linux",
             "hidden": true,
             "inherits": "base",
             "condition": {
@@ -25,7 +25,7 @@
             }
         },
         {
-            "name": "platform",
+            "name": "platform-darwin",
             "hidden": true,
             "inherits": "base",
             "condition": {
@@ -41,7 +41,7 @@
             }
         },
         {
-            "name": "platform",
+            "name": "platform-windows",
             "hidden": true,
             "inherits": "base",
             "condition": {
@@ -58,7 +58,7 @@
         },
         {
             "name": "dev",
-            "inherits": "platform",
+            "inherits": ["platform-linux", "platform-darwin", "platform-windows"],
             "displayName": "Development (Debug)",
             "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
@@ -68,7 +68,7 @@
         },
         {
             "name": "test",
-            "inherits": "platform",
+            "inherits": ["platform-linux", "platform-darwin", "platform-windows"],
             "displayName": "Test (RelWithDebInfo)",
             "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
@@ -78,7 +78,7 @@
         },
         {
             "name": "prod",
-            "inherits": "platform",
+            "inherits": ["platform-linux", "platform-darwin", "platform-windows"],
             "displayName": "Production (Release)",
             "description": "Production release build with full optimizations and tests compiled out.",
             "cacheVariables": {
