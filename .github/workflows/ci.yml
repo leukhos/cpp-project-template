@@ -27,9 +27,9 @@ jobs:
         with:
           path: |
             ${{ env.BUILD_DIR }}/vcpkg_installed
-          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json') }}
+          key: ${{ runner.os }}-vcpkg-${{ matrix.preset }}-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json') }}
           restore-keys: |
-            ${{ runner.os }}-vcpkg-
+            ${{ runner.os }}-vcpkg-${{ matrix.preset }}-
 
       - name: Cache CMake configuration
         uses: actions/cache@v5
@@ -37,24 +37,18 @@ jobs:
           path: |
             ${{ env.BUILD_DIR }}/CMakeCache.txt
             ${{ env.BUILD_DIR }}/CMakeFiles
-          key: ${{ runner.os }}-cmake-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt', 'vcpkg.json') }}
+          key: ${{ runner.os }}-cmake-${{ matrix.preset }}-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt', 'vcpkg.json') }}
           restore-keys: |
-            ${{ runner.os }}-cmake-
+            ${{ runner.os }}-cmake-${{ matrix.preset }}-
 
-      - name: Setup vcpkg environment (Linux/macOS)
+      - name: Setup environment (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
           echo "VCPKG_ROOT=${VCPKG_INSTALLATION_ROOT}" >> $GITHUB_ENV
 
-      - name: Setup MSVC environment (Windows)
+      - name: Setup environment (Windows)
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Setup vcpkg environment (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          echo "VCPKG_ROOT=$env:VCPKG_INSTALLATION_ROOT" >> $env:GITHUB_ENV
-        shell: pwsh
 
       - name: Configure CMake
         run: >
