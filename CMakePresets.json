@@ -51,7 +51,7 @@
             },
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_platform": "cl",
+                "CMAKE_CXX_COMPILER": "cl",
                 "CMAKE_C_FLAGS": "/W4 /permissive-",
                 "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc"
             }
@@ -63,8 +63,7 @@
             "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CALCULATOR_BUILD_TESTS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "tests"
+                "CALCULATOR_BUILD_TESTS": "ON"
             }
         },
         {
@@ -74,8 +73,7 @@
             "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "CALCULATOR_BUILD_TESTS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "tests"
+                "CALCULATOR_BUILD_TESTS": "ON"
             }
         },
         {

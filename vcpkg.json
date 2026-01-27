@@ -1,17 +1,14 @@
 {
   "name": "calculator",
+  "dependencies": [
+    "doctest",
+    "trompeloeil"
+  ],
   "features": {
-    "benchmarks": {
+    "bench": {
       "description": "Build benchmarks",
       "dependencies": [
         "benchmark"
-      ]
-    },
-    "tests": {
-      "description": "Build tests",
-      "dependencies": [
-        "doctest",
-        "trompeloeil"
       ]
     }
   }
