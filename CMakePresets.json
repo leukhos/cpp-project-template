@@ -6,7 +6,7 @@
     "configurePresets": [
         {
             "name": "dev",
-            "inherits": ["base", "platform"],
+            "inherits": "platform",
             "displayName": "Development (Debug)",
             "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
@@ -16,7 +16,7 @@
         },
         {
             "name": "test",
-            "inherits": ["base", "platform"],
+            "inherits": "platform",
             "displayName": "Test (RelWithDebInfo)",
             "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
@@ -26,7 +26,7 @@
         },
         {
             "name": "prod",
-            "inherits": ["base", "platform"],
+            "inherits": "platform",
             "displayName": "Production (Release)",
             "description": "Production release build with full optimizations and tests compiled out.",
             "cacheVariables": {
