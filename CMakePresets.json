@@ -30,8 +30,7 @@
             "displayName": "Production (Release)",
             "description": "Production release build with full optimizations and tests compiled out.",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
-                "DOCTEST_CONFIG_DISABLE": "ON"
+                "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
@@ -40,7 +39,8 @@
             "displayName": "Benchmark (Release)",
             "description": "Benchmarking profile with release optimizations and performance tests enabled.",
             "cacheVariables": {
-                "VCPKG_MANIFEST_FEATURES": "bench"
+                "VCPKG_MANIFEST_FEATURES": "bench",
+                "CALCULATOR_BUILD_BENCHMARKS": "ON"
             }
         }
     ]

@@ -2,6 +2,7 @@
 #include "calculator/calculator.h"
 
 // Third-party headers
+#define DOCTEST_CONFIG_IMPLEMENTATION_IN_DLL
 #include <doctest/doctest.h>
 
 // Standard library headers
