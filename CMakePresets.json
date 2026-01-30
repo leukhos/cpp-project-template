@@ -1,56 +1,46 @@
 {
-    "version": 6,
+    "version": 9,
+    "include": [
+        "cmake/presets/CMake${hostSystemName}Presets.json"
+    ],
     "configurePresets": [
         {
-            "name": "default",
-            "hidden": true,
-            "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-            "binaryDir": "${sourceDir}/build",
+            "name": "dev",
+            "inherits": "platform",
+            "displayName": "Development (Debug)",
+            "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CALCULATOR_BUILD_TESTS": "ON",
-                "VCPKG_MANIFEST_FEATURES": "tests"
+                "CALCULATOR_ENABLE_TEST": "ON"
             }
         },
         {
-            "name": "gcc",
-            "displayName": "GCC",
-            "description": "Build configuration using GCC compiler and vcpkg toolchain",
-            "inherits": "default",
+            "name": "test",
+            "inherits": "platform",
+            "displayName": "Test (RelWithDebInfo)",
+            "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CALCULATOR_ENABLE_TEST": "ON"
             }
         },
         {
-            "name": "clang",
-            "displayName": "Clang",
-            "description": "Build configuration using Clang compiler and vcpkg toolchain",
-            "inherits": "default",
+            "name": "prod",
+            "inherits": "platform",
+            "displayName": "Production (Release)",
+            "description": "Production release build with full optimizations and tests compiled out.",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wpedantic"
+                "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
-            "name": "msvc",
-            "displayName": "MSVC",
-            "description": "Build configuration using MSVC compiler and vcpkg toolchain",
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            },
-            "inherits": "default",
+            "name": "bench",
+            "inherits": "prod",
+            "displayName": "Benchmark (Release)",
+            "description": "Benchmarking profile with release optimizations and performance tests enabled.",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl",
-                "CMAKE_CXX_FLAGS": "/W4 /permissive- /EHsc",
-                "CMAKE_C_FLAGS": "/W4 /permissive-"
+                "VCPKG_MANIFEST_FEATURES": "bench",
+                "CALCULATOR_ENABLE_BENCH": "ON"
             }
         }
     ]
