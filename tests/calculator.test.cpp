@@ -5,8 +5,7 @@
 #include <doctest/doctest.h>
 #include <doctest/trompeloeil.hpp>
 
-// Functional/Integration Tests (Rust-style: tests in tests/ directory)
-// These tests verify the public API and behavior from a user's perspective
+// Functional/Integration tests for public API
 
 TEST_CASE("Calculator - functional test for basic arithmetic workflow") {
   // This test simulates a real-world usage scenario
@@ -128,16 +127,16 @@ TEST_CASE("Calculator - functional test for precision") {
   }
 }
 
-// Mock interface for demonstration purposes
-class CalculatorInterface {
+// Service interface for dependency injection and mocking
+class ICalculator {
 public:
-  virtual ~CalculatorInterface() = default;
+  virtual ~ICalculator() = default;
   virtual int add(int first_value, int second_value) = 0;
   virtual int subtract(int first_value, int second_value) = 0;
 };
 
 // Mock implementation using Trompeloeil
-class MockCalculator : public CalculatorInterface {
+class MockCalculator : public ICalculator {
 public:
   MAKE_MOCK2(add, int(int, int), override);
   MAKE_MOCK2(subtract, int(int, int), override);

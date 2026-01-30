@@ -24,9 +24,8 @@ double Calculator::divide(int first_value, int second_value) {
   return static_cast<double>(first_value) / second_value;
 }
 
-// Unit tests (Rust-style: tests live with the code)
-// These are disabled in production builds via DOCTEST_CONFIG_DISABLE
-// and enabled in test builds (when DOCTEST_CONFIG_DISABLE is not defined)
+// Unit tests (embedded in source file)
+// Disabled in production builds via DOCTEST_CONFIG_DISABLE
 #define DOCTEST_CONFIG_IMPLEMENTATION_IN_DLL
 #include <doctest/doctest.h>
 
