@@ -17,7 +17,7 @@ target_sources(calculator
 
 target_compile_features(calculator PUBLIC cxx_std_20)
 
-if(NOT CALCULATOR_BUILD_TESTS)
+if(NOT CALCULATOR_ENABLE_TEST)
     target_compile_definitions(calculator PRIVATE DOCTEST_CONFIG_DISABLE)
 endif()
 

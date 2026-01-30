@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.30)
 project(calculator)
 
+option(CALCULATOR_ENABLE_TEST "Enable testing" OFF)
+option(CALCULATOR_ENABLE_BENCH "Enable benchmarking" OFF)
+
 add_subdirectory(src)
 
-option(CALCULATOR_BUILD_TESTS "Build tests for the calculator library" OFF)
-if(CALCULATOR_BUILD_TESTS)
+if(CALCULATOR_ENABLE_TEST)
     include(CTest)
     add_subdirectory(tests)
 endif()
 
-option(CALCULATOR_BUILD_BENCHMARKS "Build benchmark executables" OFF)
-if(CALCULATOR_BUILD_BENCHMARKS)
+if(CALCULATOR_ENABLE_BENCH)
     add_subdirectory(benches)
 endif()

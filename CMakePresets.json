@@ -11,7 +11,7 @@
             "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CALCULATOR_BUILD_TESTS": "ON"
+                "CALCULATOR_ENABLE_TEST": "ON"
             }
         },
         {
@@ -21,7 +21,7 @@
             "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "CALCULATOR_BUILD_TESTS": "ON"
+                "CALCULATOR_ENABLE_TEST": "ON"
             }
         },
         {
@@ -40,7 +40,7 @@
             "description": "Benchmarking profile with release optimizations and performance tests enabled.",
             "cacheVariables": {
                 "VCPKG_MANIFEST_FEATURES": "bench",
-                "CALCULATOR_BUILD_BENCHMARKS": "ON"
+                "CALCULATOR_ENABLE_BENCH": "ON"
             }
         }
     ]

@@ -6,7 +6,7 @@
   ],
   "features": {
     "bench": {
-      "description": "Build benchmarks",
+      "description": "Benchmarking support",
       "dependencies": [
         "benchmark"
       ]

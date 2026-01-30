@@ -1,10 +1,6 @@
 // First-party headers
 #include "calculator/calculator.h"
 
-// Third-party headers
-#define DOCTEST_CONFIG_IMPLEMENTATION_IN_DLL
-#include <doctest/doctest.h>
-
 // Standard library headers
 #include <stdexcept>
 
@@ -31,6 +27,8 @@ double Calculator::divide(int first_value, int second_value) {
 // Unit tests (Rust-style: tests live with the code)
 // These are disabled in production builds via DOCTEST_CONFIG_DISABLE
 // and enabled in test builds (when DOCTEST_CONFIG_DISABLE is not defined)
+#define DOCTEST_CONFIG_IMPLEMENTATION_IN_DLL
+#include <doctest/doctest.h>
 
 TEST_CASE("Calculator - addition operations") {
   Calculator calculator;
@@ -45,7 +43,7 @@ TEST_CASE("Calculator - addition operations") {
     int result = calculator.add(first_value, second_value);
 
     // Assert
-    CHECK(result == expected_sum);
+    CHECK_EQ(result, expected_sum);
   }
 
   SUBCASE("addition with large positive numbers") {

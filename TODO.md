@@ -13,40 +13,6 @@ This TODO list tracks the ongoing refactoring to align the C++ project with Rust
   - [ ] Check integration test coverage
 - [ ] Document distinction between unit and functional tests
 
-### 3.2 Test profile configuration
-- [ ] Ensure `test` preset properly enables DocTest
-- [ ] Verify `CALCULATOR_BUILD_TESTS` CMake option behavior
-- [ ] Consider adding test-specific compiler flags (sanitizers, coverage)
-- [ ] Review vcpkg test feature integration
-
-### 3.3 vcpkg test integration
-- [ ] Review `VCPKG_MANIFEST_FEATURES` usage for tests
-- [ ] Ensure test dependencies (doctest, trompeloeil) are properly gated
-- [ ] Verify [vcpkg.json](vcpkg.json) feature configuration
-
-## 4. Complete CMakePresets Review
-
-### 4.1 Preset inheritance structure
-- [ ] Design clean inheritance hierarchy
-  - Platform bases → Profile types → Specific configurations
-- [ ] Minimize duplication
-- [ ] Ensure maintainability
-
-### 4.2 Build types and configurations
-- [ ] Map CMake build types to Rust profiles
-  - Debug → default/dev
-  - RelWithDebInfo → test
-  - Release → release
-  - MinSizeRel → (consider if needed)
-- [ ] Define appropriate compiler flags per profile
-- [ ] Consider profile-specific optimizations
-
-### 4.3 Testing and validation
-- [ ] Test all new presets on Linux
-- [ ] Test on macOS (if available)
-- [ ] Test on Windows (if available)
-- [ ] Verify CI workflow with new presets
-- [ ] Update [.github/workflows/](.github/workflows/) to use new presets
 
 ## 5. Documentation Review and Update
 
