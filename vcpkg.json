@@ -1,14 +1,16 @@
 {
   "name": "calculator",
-  "dependencies": [
-    "doctest",
-    "trompeloeil"
-  ],
   "features": {
     "bench": {
       "description": "Benchmarking support",
       "dependencies": [
         "benchmark"
+      ]
+    },
+    "test": {
+      "description": "Benchmarking support",
+      "dependencies": [
+        "gtest"
       ]
     }
   }

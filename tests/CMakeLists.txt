@@ -1,5 +1,4 @@
-find_package(doctest REQUIRED)
-find_package(trompeloeil REQUIRED)
+find_package(GTest REQUIRED)
 
 add_executable(calculator_tests)
 target_sources(calculator_tests
@@ -11,9 +10,11 @@ target_sources(calculator_tests
 target_link_libraries(calculator_tests
     PRIVATE
         calculator
-        doctest::doctest 
-        trompeloeil::trompeloeil
+        GTest::gtest
+        GTest::gtest_main
+        GTest::gmock
+        GTest::gmock_main
 )
 
-include(doctest)
-doctest_discover_tests(calculator_tests)
+include(GoogleTest)
+gtest_discover_tests(calculator_tests)

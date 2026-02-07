@@ -1,6 +1,3 @@
-find_package(doctest REQUIRED)
-find_package(trompeloeil REQUIRED)
-
 add_library(calculator)
 add_library(calculator::calculator ALIAS calculator)
 
@@ -16,12 +13,6 @@ target_sources(calculator
 )
 
 target_compile_features(calculator PUBLIC cxx_std_20)
-
-if(NOT CALCULATOR_ENABLE_TEST)
-    target_compile_definitions(calculator PRIVATE DOCTEST_CONFIG_DISABLE)
-endif()
-
-target_link_libraries(calculator PRIVATE doctest::doctest trompeloeil::trompeloeil)
 
 install(
     TARGETS calculator

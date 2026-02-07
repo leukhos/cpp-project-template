@@ -11,6 +11,7 @@
             "description": "Development profile. Unoptimized debug build with full symbols and tests enabled.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "VCPKG_MANIFEST_FEATURES": "test",
                 "CALCULATOR_ENABLE_TEST": "ON"
             }
         },
@@ -21,6 +22,7 @@
             "description": "Test execution profile with moderate optimizations and debug info. Runs all unit and functional tests.",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "VCPKG_MANIFEST_FEATURES": "test",
                 "CALCULATOR_ENABLE_TEST": "ON"
             }
         },
